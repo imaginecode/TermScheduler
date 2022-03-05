@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.TermScheduler.R;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class CourseList extends AppCompatActivity {
+public class AssessmentList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_list);
+        setContentView(R.layout.activity_assessment_list);
     }
-
 }

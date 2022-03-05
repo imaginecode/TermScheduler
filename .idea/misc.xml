@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_course_view.xml" value="0.2079533941236069" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_term_view.xml" value="0.25" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_term_list.xml" value="0.22" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/menu_termlist.xml" value="0.1" />
       </map>
     </option>
   </component>
