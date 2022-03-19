@@ -6,4 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".UI.DetailedTermView">
 
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="377dp"
+        android:layout_height="101dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Term Name: "></TextView>
+
+                <EditText
+                    android:id="@+id/editTermName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Spring Term"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Term Start"></TextView>
+
+                <EditText
+                    android:id="@+id/editTermStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="5/19/2022"></EditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Term End"></TextView>
+
+                <EditText
+                    android:id="@+id/editTermEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="8/19/2022"></EditText>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="saveButton"
+                android:text="Save"></Button>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview2"
+        android:layout_width="411dp"
+        android:layout_height="432dp"
+        android:background="@color/purple_200"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollview" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:onClick="goToCourseList"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
