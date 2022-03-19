@@ -26,7 +26,36 @@ public class Repository {
 
     public Repository(Application application){
         TermSchedulerDataBaseBuilder db=TermSchedulerDataBaseBuilder.getDatabase(application);
-        m
+        mTermDAO=db.termDAO();
+        mCourseDAO=db.courseDAO();
+        mAssessmentDAO=db.assessmentDAO();
+
+    }
+
+    public void insert(Term term){
+        databaseExecutor.execute(()->{
+            mTermDAO.insert(term);
+        });
+        try{
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public List<Term>getAllTerms() {
+        databaseExecutor.execute(() -> {
+            mAllTerms = mTermDAO.getAllTerms();
+        });
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return mAllTerms;
+
     }
 
 }

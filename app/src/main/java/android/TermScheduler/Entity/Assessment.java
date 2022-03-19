@@ -11,13 +11,13 @@ public class Assessment {
     @PrimaryKey(autoGenerate = true)
     private int assessmentID;
     private String assessmentTitle;
-    private Date assessmentStart;
-    private Date assessmentEnd;
+    private String assessmentStart;
+    private String assessmentEnd;
     private String assessmentType;
 //may need a foreign key for CourseID
 
 
-    public Assessment(int assessmentID, String assessmentTitle, Date assessmentStart, Date assessmentEnd, String assessmentType) {
+    public Assessment(int assessmentID, String assessmentTitle, String assessmentStart, String assessmentEnd, String assessmentType) {
         this.assessmentID = assessmentID;
         this.assessmentTitle = assessmentTitle;
         this.assessmentStart = assessmentStart;
@@ -52,19 +52,19 @@ public class Assessment {
         this.assessmentTitle = assessmentTitle;
     }
 
-    public Date getAssessmentStart() {
+    public String getAssessmentStart() {
         return assessmentStart;
     }
 
-    public void setAssessmentStart(Date assessmentStart) {
+    public void setAssessmentStart(String assessmentStart) {
         this.assessmentStart = assessmentStart;
     }
 
-    public Date getAssessmentEnd() {
+    public String getAssessmentEnd() {
         return assessmentEnd;
     }
 
-    public void setAssessmentEnd(Date assessmentEnd) {
+    public void setAssessmentEnd(String assessmentEnd) {
         this.assessmentEnd = assessmentEnd;
     }
 

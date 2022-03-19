@@ -11,15 +11,15 @@ public class Course {
     private int courseID;
 
     private String courseTitle;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String status;
     private String instructorName;
     private String instructorCell;
     private String instructorEmail;
     private String optionalNote;
 
-    public Course(int courseID, String courseTitle, Date startDate, Date endDate,
+    public Course(int courseID, String courseTitle, String startDate, String endDate,
                   String status, String instructorName, String instructorCell,
                   String instructorEmail, String optionalNote) {
         this.courseID = courseID;
@@ -64,19 +64,19 @@ public class Course {
         this.courseTitle = courseTitle;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

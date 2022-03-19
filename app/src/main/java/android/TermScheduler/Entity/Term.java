@@ -13,11 +13,11 @@ public class Term {
     private int termID;
 
     private String termTitle;
-    private Date termStart;
-    private Date termEnd;
+    private String termStart;
+    private String termEnd;
 
 
-    public Term(int termID, String termTitle, Date termStart, Date termEnd) {
+    public Term(int termID, String termTitle, String termStart, String termEnd) {
         this.termID = termID;
         this.termTitle = termTitle;
         this.termStart = termStart;
@@ -40,19 +40,19 @@ public class Term {
         this.termTitle = termTitle;
     }
 
-    public Date getTermStart() {
+    public String getTermStart() {
         return termStart;
     }
 
-    public void setTermStart(Date termStart) {
+    public void setTermStart(String termStart) {
         this.termStart = termStart;
     }
 
-    public Date getTermEnd() {
+    public String getTermEnd() {
         return termEnd;
     }
 
-    public void setTermEnd(Date termEnd) {
+    public void setTermEnd(String termEnd) {
         this.termEnd = termEnd;
     }
 
