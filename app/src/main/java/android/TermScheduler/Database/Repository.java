@@ -2,6 +2,7 @@ package android.TermScheduler.Database;
 
 import android.TermScheduler.DAO.AssessmentDAO;
 import android.TermScheduler.DAO.CourseDAO;
+import android.TermScheduler.DAO.InstructorDAO;
 import android.TermScheduler.DAO.TermDAO;
 import android.TermScheduler.Entity.Assessment;
 import android.TermScheduler.Entity.Course;
@@ -16,9 +17,14 @@ public class Repository {
     private TermDAO mTermDAO;
     private CourseDAO mCourseDAO;
     private AssessmentDAO mAssessmentDAO;
+    private InstructorDAO mInstructorDAO;
+
+
+
     private List<Term> mAllTerms;
     private List<Course> mAllCourses;
     private List<Assessment> mAllAssessments;
+    private List<Instuctor>
 
     private static int NUMBER_OF_THREADS=4;
     static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);

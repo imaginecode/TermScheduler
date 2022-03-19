@@ -12,10 +12,19 @@ import android.TermScheduler.R;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.List;
 
 public class TermList extends AppCompatActivity {
+
+    EditText editTermName;
+    EditText editTermStart;
+    EditText editTermEnd;
+    String termName;
+    String termStart;
+    String termEnd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,21 @@ public class TermList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setTerms(terms);
+
+        //This block of code is causing the whole app to crash
+
+//        //Using variables termName Start and End to edit and save data
+//        editTermName=findViewById(R.id.editTermName);
+//        editTermStart=findViewById(R.id.editTermStart);
+//        editTermEnd=findViewById(R.id.editTermEnd);
+//        termName=getIntent().getStringExtra("name");
+//        termStart=getIntent().getStringExtra("startDate");
+//        termEnd=getIntent().getStringExtra("endDate");
+//
+//        //Getting text that ws set into strings termName and setting text that was edited
+//        editTermName.setText(termName);
+//        editTermStart.setText(termStart);
+//        editTermEnd.setText(termEnd);
 
     }
 

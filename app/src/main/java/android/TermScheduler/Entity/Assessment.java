@@ -14,26 +14,36 @@ public class Assessment {
     private String assessmentStart;
     private String assessmentEnd;
     private String assessmentType;
-//may need a foreign key for CourseID
+    private int courseID;
 
-
-    public Assessment(int assessmentID, String assessmentTitle, String assessmentStart, String assessmentEnd, String assessmentType) {
+    public Assessment(int assessmentID, String assessmentTitle, String assessmentStart, String assessmentEnd, String assessmentType, int courseID) {
         this.assessmentID = assessmentID;
         this.assessmentTitle = assessmentTitle;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
         this.assessmentType = assessmentType;
+        this.courseID = courseID;
     }
+
 
     @Override
     public String toString() {
-        return "Assessments{" +
+        return "Assessment{" +
                 "assessmentID=" + assessmentID +
                 ", assessmentTitle='" + assessmentTitle + '\'' +
-                ", assessmentStart=" + assessmentStart +
-                ", assessmentEnd=" + assessmentEnd +
+                ", assessmentStart='" + assessmentStart + '\'' +
+                ", assessmentEnd='" + assessmentEnd + '\'' +
                 ", assessmentType='" + assessmentType + '\'' +
+                ", courseID=" + courseID +
                 '}';
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     public int getAssessmentID() {
