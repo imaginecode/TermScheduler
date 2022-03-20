@@ -13,22 +13,17 @@ public class Course {
     private String courseTitle;
     private String startDate;
     private String endDate;
-    private String status;
-    private String instructorName;
-    private String instructorCell;
-    private String instructorEmail;
+    private String courseStatus;
     private String optionalNote;
     private String termID;
 
-    public Course(int courseID, String courseTitle, String startDate, String endDate, String status, String instructorName, String instructorCell, String instructorEmail, String optionalNote, String termID) {
+
+    public Course(int courseID, String courseTitle, String startDate, String endDate, String courseStatus, String optionalNote, String termID) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = status;
-        this.instructorName = instructorName;
-        this.instructorCell = instructorCell;
-        this.instructorEmail = instructorEmail;
+        this.courseStatus = courseStatus;
         this.optionalNote = optionalNote;
         this.termID = termID;
     }
@@ -40,13 +35,18 @@ public class Course {
                 ", courseTitle='" + courseTitle + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", status='" + status + '\'' +
-                ", instructorName='" + instructorName + '\'' +
-                ", instructorCell='" + instructorCell + '\'' +
-                ", instructorEmail='" + instructorEmail + '\'' +
+                ", courseStatus='" + courseStatus + '\'' +
                 ", optionalNote='" + optionalNote + '\'' +
                 ", termID='" + termID + '\'' +
                 '}';
+    }
+
+    public String getCourseStatus() {
+        return courseStatus;
+    }
+
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus;
     }
 
     public String getTermID() {
@@ -89,37 +89,6 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public String getInstructorCell() {
-        return instructorCell;
-    }
-
-    public void setInstructorCell(String instructorCell) {
-        this.instructorCell = instructorCell;
-    }
-
-    public String getInstructorEmail() {
-        return instructorEmail;
-    }
-
-    public void setInstructorEmail(String instructorEmail) {
-        this.instructorEmail = instructorEmail;
-    }
 
     public String getOptionalNote() {
         return optionalNote;

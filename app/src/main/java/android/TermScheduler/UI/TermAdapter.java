@@ -17,9 +17,15 @@ import java.util.List;
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
     class TermViewHolder extends RecyclerView.ViewHolder{
         private final TextView termItemView;
+        private final TextView termStart;
+        private final TextView termEnd;
+
         private TermViewHolder(View itemView){
             super(itemView);
             termItemView=itemView.findViewById(R.id.textView);
+            termStart=itemView.findViewById(R.id.termStart);
+            termEnd=itemView.findViewById(R.id.termEnd);
+
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -31,6 +37,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     intent.putExtra("name", current.getTermTitle());
                     intent.putExtra("startDate", current.getTermStart());
                     intent.putExtra("endDate", current.getTermEnd());
+                    intent.putExtra("position", position);
                     context.startActivity(intent);
                 }
             });
@@ -47,7 +54,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     }
     @NonNull
     @Override
-    // Used to be  public Term.TermViewHolder but was complaining about the return type being incorrect
     public TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView=mInflater.inflate(R.layout.term_list_item,parent,false);
         return new TermViewHolder(itemView);
@@ -57,11 +63,15 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     public void onBindViewHolder(@NonNull TermAdapter.TermViewHolder holder, int position) {
         if(mTerms!=null){
             Term current=mTerms.get(position);
-            String name=current.getTermTitle();
-            holder.termItemView.setText(name);
+//            String name=current.getTermTitle();
+            holder.termItemView.setText(current.getTermTitle());
+            holder.termStart.setText(current.getTermStart());
+            holder.termEnd.setText(current.getTermEnd());
         }
         else{
             holder.termItemView.setText("No term name");
+            holder.termStart.setText("No Term Start");
+            holder.termEnd.setText("No Term End");
         }
     }
     public void setTerms(List<Term> terms){
