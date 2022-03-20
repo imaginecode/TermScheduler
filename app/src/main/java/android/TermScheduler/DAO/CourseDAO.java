@@ -15,13 +15,13 @@ import java.util.List;
 @Dao
 public interface CourseDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Course course);
+    void insertCourse(Course course);
 
     @Update
     void update(Course course);
 
     @Delete
-    void delete(Course course);
+    void deleteCourse(Course course);
 
     @Query("DELETE FROM courses")
     void deleteAllCourses();

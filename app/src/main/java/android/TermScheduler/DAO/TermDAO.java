@@ -29,9 +29,11 @@ public interface TermDAO {
     @Query("DELETE FROM terms WHERE termID = :id")
     void deleteTermById(int id);
 
+    @Query("SELECT * FROM terms WHERE termID = :id")
+    Term getTermById(int id);
+
     @Query("DELETE FROM terms")
     void deleteAllTerms();
 
-    @Query("SELECT * FROM terms WHERE termID = :id")
-    Term getTermById(int id);
+
 }

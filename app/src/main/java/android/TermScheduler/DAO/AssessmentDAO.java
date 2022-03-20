@@ -15,23 +15,25 @@ import java.util.List;
 @Dao
 public interface AssessmentDAO {
 
-    @Query("SELECT * FROM assessments Where courseID = :id")
-    List<Assessment> getAllAssessmentsByCourseId(int id);
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Assessment assessment);
+    void insertAssessment(Assessment assessment);
 
     @Update
     void update(Assessment assessment);
 
     @Delete
-    void delete(Assessment assessment);
+    void deleteAssessment(Assessment assessment);
 
     @Query("DELETE FROM assessments")
     void deleteAllAssessments();
 
     @Query("SELECT * FROM assessments WHERE assessmentID = :id")
     Assessment getAssessmentById(int id);
+
+    @Query("SELECT * FROM assessments WHERE courseID = :id")
+    List<Assessment> getAllAssessmentsByCourseId(int id);
 
     @Query("SELECT * FROM assessments ORDER BY assessmentID ASC")
     List<Assessment> getAllAssessments();
