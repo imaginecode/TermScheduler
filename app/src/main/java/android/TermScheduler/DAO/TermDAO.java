@@ -15,14 +15,23 @@ import java.util.List;
 public interface TermDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Term term);
+    void insertTerm(Term term);
 
     @Update
-    void update(Term term);
+    void updateTerm(Term term);
 
     @Delete
-    void delete(Term term);
+    void deleteTerm(Term term);
 
     @Query("SELECT * FROM terms ORDER BY termID ASC")
     List<Term> getAllTerms();
+
+    @Query("DELETE FROM terms WHERE termID = :id")
+    void deleteTermById(int id);
+
+    @Query("DELETE FROM terms")
+    void deleteAllTerms();
+
+    @Query("SELECT * FROM terms WHERE termID = :id")
+    Term getTermById(int id);
 }

@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         Repository repo = new Repository(getApplication());
         Term term = new Term(1,"Term 1", "3/18/2022", "5/30/2022");
-        repo.insert(term);
+        repo.insertTerm(term);
     }
 }
