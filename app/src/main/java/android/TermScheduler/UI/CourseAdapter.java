@@ -1,6 +1,5 @@
 package android.TermScheduler.UI;
 
-import android.TermScheduler.Entity.Assessment;
 import android.TermScheduler.Entity.Course;
 import android.TermScheduler.R;
 import android.content.Context;
@@ -35,7 +34,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 public void onClick(View view) {
                     int position=getAdapterPosition();
                     final Course current=mCourse.get(position);
-                    Intent intent = new Intent(context, DetailedCourseView.class);
+                    Intent intent = new Intent(context, DetailedCourseActivity.class);
                     intent.putExtra("courseTitle", current.getCourseTitle());
                     intent.putExtra("courseStartDate", current.getStartDate());
                     intent.putExtra("courseEndDate", current.getEndDate());

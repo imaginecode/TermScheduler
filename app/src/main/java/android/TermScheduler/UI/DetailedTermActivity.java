@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.TermScheduler.R;
 import android.view.View;
 
-public class DetailedTermView extends AppCompatActivity {
+public class DetailedTermActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

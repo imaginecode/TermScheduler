@@ -1,15 +1,14 @@
-package android.TermScheduler.UI;
+package android.TermScheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.TermScheduler.R;
 
-public class AssessmentList extends AppCompatActivity {
+public class InstructorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_list);
+        setContentView(R.layout.activity_instructor_add);
     }
 }

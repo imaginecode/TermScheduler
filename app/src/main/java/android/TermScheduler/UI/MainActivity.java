@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void EnterHere(View view) {
-        Intent intent = new Intent(MainActivity.this, TermList.class);
+        Intent intent = new Intent(MainActivity.this, TermActivity.class);
         startActivity(intent);
         Repository repo = new Repository(getApplication());
         Term term = new Term(1,"Term 1", "3/18/2022", "5/30/2022");
