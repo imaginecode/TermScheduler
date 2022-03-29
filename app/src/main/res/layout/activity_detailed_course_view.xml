@@ -6,4 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".UI.DetailedCourseActivity">
 
+
+    <TextView
+        android:id="@+id/courseTitle"
+        android:layout_width="62dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Title:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/courseStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Start:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseTitle" />
+
+    <TextView
+        android:id="@+id/courseEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:text="End:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseStart" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="116dp"
+        android:text="Status:"
+        app:layout_constraintBottom_toTopOf="@+id/coursesRecycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseEnd"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editCourseName"
+        android:layout_width="174dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:hint="Course Name"
+        app:layout_constraintBottom_toTopOf="@+id/editCourseStart"
+        app:layout_constraintStart_toEndOf="@+id/courseTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <EditText
+        android:id="@+id/editCourseStart"
+        android:layout_width="168dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="16dp"
+        android:hint=" Course Start"
+        app:layout_constraintBottom_toTopOf="@+id/courseEndEdit"
+        app:layout_constraintStart_toEndOf="@+id/courseStart" />
+
+    <EditText
+        android:id="@+id/courseEndEdit"
+        android:layout_width="173dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="4dp"
+        android:hint=" Course End"
+        app:layout_constraintBottom_toTopOf="@+id/statusSpinner"
+        app:layout_constraintStart_toEndOf="@+id/courseEnd" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/coursesRecycler"
+        android:layout_width="413dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/addInstructor"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="266dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="100dp"
+        android:hint="Select Status"
+        android:outlineSpotShadowColor="@color/purple_500"
+        app:layout_constraintBottom_toTopOf="@+id/coursesRecycler"
+        app:layout_constraintStart_toEndOf="@+id/status" />
+
+    <Button
+        android:id="@+id/goToAssociatedAssessments"
+        android:layout_width="191dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="24dp"
+        android:text="Associated Assessments"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/deleteCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="Add Instructor"
+        app:layout_constraintBottom_toTopOf="@+id/goToAssociatedAssessments"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coursesRecycler"
+        app:layout_constraintVertical_bias="0.687" />
+
+    <Button
+        android:id="@+id/addInstructor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="40dp"
+        android:text="Delete Course"
+        app:layout_constraintBottom_toTopOf="@+id/goToAssociatedAssessments"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

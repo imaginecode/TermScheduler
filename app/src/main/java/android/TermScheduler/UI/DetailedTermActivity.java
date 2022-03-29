@@ -21,4 +21,10 @@ public class DetailedTermActivity extends AppCompatActivity {
     public void saveButton(View view) {
         //Add code to save and do update queries
     }
+
+    public void saveTerm(View view) {
+    }
+
+    public void addCourse(View view) {
+    }
 }

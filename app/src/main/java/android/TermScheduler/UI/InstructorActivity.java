@@ -1,7 +1,8 @@
-package android.TermScheduler;
+package android.TermScheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.TermScheduler.R;
 import android.os.Bundle;
 
 public class InstructorActivity extends AppCompatActivity {

@@ -86,6 +86,14 @@ public class Repository {
 //    }
 
 
+    public Term getTermByID(int id) {
+           return mTermDAO.getTermById(id);
+
+    }
+
+
+
+
     public void deleteTerm(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.deleteTerm(term);

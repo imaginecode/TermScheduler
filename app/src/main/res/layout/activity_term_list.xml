@@ -7,7 +7,7 @@
     tools:context=".UI.TermActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addTerm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/termRecyclerView"
         android:layout_width="407dp"
         android:layout_height="641dp"
         android:background="@color/teal_700"

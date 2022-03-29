@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.TermScheduler.Adapters.TermAdapter;
 import android.TermScheduler.Database.Repository;
 import android.TermScheduler.Entity.Term;
 import android.content.Intent;

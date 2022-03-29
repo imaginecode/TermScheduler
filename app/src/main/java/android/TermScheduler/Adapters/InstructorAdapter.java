@@ -1,7 +1,8 @@
-package android.TermScheduler.UI;
+package android.TermScheduler.Adapters;
 
 import android.TermScheduler.Entity.Instructor;
 import android.TermScheduler.R;
+import android.TermScheduler.UI.DetailedInstructorActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
                 public void onClick(View view) {
                     int position=getAdapterPosition();
                     final Instructor current=mInstructor.get(position);
-                    Intent intent = new Intent(context, DetailedAssessmentActivity.class);
+                    Intent intent = new Intent(context, DetailedInstructorActivity.class);
                     intent.putExtra("instructorID", current.getInstructorID());
                     intent.putExtra("instructorName", current.getInstructorName());
                     intent.putExtra("email", current.getInstructorEmail());

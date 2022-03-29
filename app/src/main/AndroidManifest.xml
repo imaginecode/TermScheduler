@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermSchedulerBrandonClay" >
         <activity
-            android:name=".InstructorActivity"
+            android:name=".UI.DetailedInstructorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.DetailedAssessmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.InstructorActivity"
             android:exported="false" />
         <activity
             android:name=".UI.DetailedTermActivity"
