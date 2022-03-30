@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_assessment_list.xml" value="0.2130192502532928" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_assessment_list.xml" value="0.33" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_course_list.xml" value="0.565625" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_assessment.xml" value="0.4427083333333333" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_course_view.xml" value="0.5" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_term_view.xml" value="0.5" />
-        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_instructor_add.xml" value="0.21732522796352582" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_instructor_add.xml" value="0.33" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_term_list.xml" value="0.22" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/assessment_list_item.xml" value="0.2130192502532928" />

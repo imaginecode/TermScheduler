@@ -6,4 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".UI.InstructorActivity">
 
+
+    <TextView
+        android:id="@+id/instructorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:text="Name:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editInstructorName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instructorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="42dp"
+        android:text="Email:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editInstructorEmail"
+        app:layout_constraintEnd_toStartOf="@+id/editInstructorEmail"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/instructorPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="35dp"
+        android:text="Phone:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editInstructorPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editInstructorName"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="66dp"
+        android:hint="Instructor Name"
+        android:paddingLeft="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/instructorName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editInstructorEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="84dp"
+        android:ems="10"
+        android:hint="Email@wgu.edu"
+        app:layout_constraintBottom_toBottomOf="@+id/editInstructorPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/instructorEmail"
+        app:layout_constraintTop_toTopOf="@+id/editInstructorName" />
+
+    <EditText
+        android:id="@+id/editInstructorPhone"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="95dp"
+        android:ems="10"
+        android:hint="580-975-346"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="@+id/instructorPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/instructorPhone"
+        app:layout_constraintTop_toBottomOf="@+id/instructorPhone" />
+
+    <Button
+        android:id="@+id/saveInstructor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="100dp"
+        android:onClick="saveInstructor"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/deleteInstructor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:onClick="deleteInstructor"
+        android:text="Delete Instructor"
+        app:layout_constraintBottom_toBottomOf="@+id/saveInstructor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/saveInstructor" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

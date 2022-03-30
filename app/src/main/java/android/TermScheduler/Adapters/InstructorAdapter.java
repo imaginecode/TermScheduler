@@ -2,7 +2,6 @@ package android.TermScheduler.Adapters;
 
 import android.TermScheduler.Entity.Instructor;
 import android.TermScheduler.R;
-import android.TermScheduler.UI.DetailedInstructorActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
