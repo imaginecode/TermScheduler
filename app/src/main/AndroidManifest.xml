@@ -11,24 +11,36 @@
         android:theme="@style/Theme.TermSchedulerBrandonClay" >
         <activity
             android:name=".UI.DetailedAssessmentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Assessment Details"
+            android:parentActivityName=".UI.AssessmentActivity"/>
         <activity
             android:name=".UI.InstructorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Instructor Details"
+            android:parentActivityName=".UI.CourseActivity"/>
         <activity
             android:name=".UI.DetailedTermActivity"
             android:exported="false"
-            android:label="Detailed Term View"
+            android:label="Term Details"
             android:parentActivityName=".UI.TermActivity" />
         <activity
             android:name=".UI.DetailedCourseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Course Details"
+            android:parentActivityName=".UI.CourseActivity"/>
         <activity
             android:name=".UI.AssessmentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Assessment List"
+            android:parentActivityName=".UI.DetailedCourseActivity"
+            />
         <activity
             android:name=".UI.CourseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Course List"
+            android:parentActivityName=".UI.DetailedCourseActivity"
+            />
         <activity
             android:name=".UI.TermActivity"
             android:exported="false"
@@ -36,6 +48,7 @@
             android:parentActivityName=".UI.MainActivity" />
         <activity
             android:name=".UI.MainActivity"
+            android:label="Welcome"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

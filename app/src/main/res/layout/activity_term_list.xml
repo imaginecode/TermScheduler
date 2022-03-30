@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".UI.TermActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <Button
         android:id="@+id/addTerm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:onClick="goToDetailedTerm"
+        android:text="Add Term"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.909"

@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:text="Add Assessment"
+        android:onClick="addAssessment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentRecycler"
