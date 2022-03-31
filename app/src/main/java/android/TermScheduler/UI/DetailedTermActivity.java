@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+
+
 public class DetailedTermActivity extends AppCompatActivity {
 
     List<Term> termList;
@@ -37,7 +39,8 @@ public class DetailedTermActivity extends AppCompatActivity {
 
     //Variables if this is an Edit instead of a create
     int mTermId;
-    int getExtraTermID;
+    //tracks the term so that correct courses and assessments are loaded
+    public static Integer getActiveTermID;
     String mName;
     String mStartD;
     String mEndD;
@@ -108,7 +111,7 @@ public class DetailedTermActivity extends AppCompatActivity {
         for (Term term : repo.getAllTerms()) {
             if (term.getTermID() == mTermId) {
                 mSelectedTerm = term;
-                getExtraTermID = term.getTermID();
+                getActiveTermID = term.getTermID();
             }
         }
         if (mSelectedTerm != null) {
