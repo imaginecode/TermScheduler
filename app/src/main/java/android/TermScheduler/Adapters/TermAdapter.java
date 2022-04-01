@@ -29,7 +29,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     // CLASS
     public class TermViewHolder extends RecyclerView.ViewHolder {
         public TextView itemStructureRecycler;
-        //todo add course here
 
         private TermViewHolder(@NonNull View itemView) {
             super(itemView);

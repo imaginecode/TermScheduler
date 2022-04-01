@@ -22,6 +22,7 @@ public class CourseActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private CourseAdapter mCourseAdapter;
     Repository repo;
+
     List<Course> mAllCourses;
     List<Course> associatedCourseList;
 
@@ -30,12 +31,14 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         repo = new Repository(getApplication());
         setCourseRecyclerAndAdapter();
         getAllCourses();
 
-        mCourseAdapter.setCourses(associatedCourseList);
+
     }
 
 
@@ -46,14 +49,16 @@ public class CourseActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mCourseAdapter);
 
-
+        mCourseAdapter.setCourses(repo.getAllCourses());
     }
 
+    //filters out courses by term id
     public void getAllCourses() {
         mAllCourses = repo.getAllCourses();
         associatedCourseList = new ArrayList<>();
         for (Course course : mAllCourses) {
-            if (course.getTermID() == DetailedTermActivity.getActiveTermID.toString()) {
+            if (course.getTermID() == "1" ) {
+//                DetailedTermActivity.getActiveTermID.toString()
                 associatedCourseList.add(course);
             }
         }
