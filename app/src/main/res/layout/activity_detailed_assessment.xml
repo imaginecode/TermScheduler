@@ -60,17 +60,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/assessmentType2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:text="Optional Note:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/optionalNote"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/editAssessmentTitle"
         android:layout_width="0dp"
@@ -85,19 +74,6 @@
         app:layout_constraintStart_toEndOf="@+id/assessmentName"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <EditText
-        android:id="@+id/optionalNote"
-        android:layout_width="179dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="109dp"
-        android:layout_marginBottom="110dp"
-        android:hint="Optional Note"
-        android:paddingLeft="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/notificationsOnOffAssessment"
-        app:layout_constraintStart_toEndOf="@+id/assessmentType2"
-        app:layout_constraintTop_toTopOf="@+id/assessmentType" />
 
     <EditText
         android:id="@+id/editStartDateAssessment"
@@ -134,14 +110,12 @@
         android:id="@+id/saveAssessment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginStart="31dp"
         android:layout_marginBottom="44dp"
         android:onClick="saveAssessment"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/optionalNote"
-        app:layout_constraintStart_toStartOf="@+id/assessmentType2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/deleteAssessment"
@@ -171,8 +145,6 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="99dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="102dp"
-        app:layout_constraintBottom_toBottomOf="@+id/assessmentType2"
         app:layout_constraintEnd_toEndOf="@+id/notificationsOnOffAssessment"
         app:layout_constraintStart_toEndOf="@+id/assessmentType"
         app:layout_constraintTop_toTopOf="@+id/assessmentEnd" />

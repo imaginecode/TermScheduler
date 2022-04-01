@@ -40,7 +40,7 @@ public class DetailedTermActivity extends AppCompatActivity {
     //Variables if this is an Edit instead of a create
     int mTermId;
     //tracks the term so that correct courses and assessments are loaded
-    public static Integer getActiveTermID;
+    public static Integer getActiveTermID; // this should be redundant with put and get from the adapters.
     String mName;
     String mStartD;
     String mEndD;

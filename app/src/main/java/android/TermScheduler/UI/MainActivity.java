@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         repo.getAllTerms();
         Term term = new Term(1,"Term 1", "3/18/2022", "5/30/2022");
         repo.insertTerm(term);
-        Course course = new Course(1,"Test", "3/18/2022", "5/30/2022", "In Progress", "This is a note", "1" );
+        Course course = new Course(1,"Test", "3/18/2022", "5/30/2022", "In Progress", "This is a optional note", "1" );
         repo.insertCourse(course);
     }
 

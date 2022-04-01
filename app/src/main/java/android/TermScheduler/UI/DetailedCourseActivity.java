@@ -9,7 +9,10 @@ import android.TermScheduler.Adapters.InstructorAdapter;
 import android.TermScheduler.Database.Repository;
 import android.TermScheduler.Entity.Course;
 import android.TermScheduler.Entity.Instructor;
+import android.TermScheduler.Entity.Term;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.TermScheduler.R;
@@ -39,7 +42,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
 
 
-    Repository mRepository;
+    Repository repo;
 
 
     List<Course> mCoursesList;
@@ -68,7 +71,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
         mTermId = getIntent().getIntExtra("selectedTermId", -1);
         mCourseId = getIntent().getIntExtra("courseId", -1);
 
-        mRepository = new Repository(getApplication());
+        repo = new Repository(getApplication());
 
         getAndSetViewsById();
 
@@ -91,13 +94,13 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
     public void getInstructorsInCourse() {
         listOfInstructors = new ArrayList<>();
-        List<Instructor> list = mRepository.getAllInstructor();
+        List<Instructor> list = repo.getAllInstructor();
         for (Instructor instructor : list){
             if (instructor.getCourseID() == mCourseId){
                 listOfInstructors.add(instructor);
             }
         }
-//       Try getting all instructors first
+//       Try getting all instructors first before narrowing it down to just those associated
     }
 
 
@@ -125,15 +128,16 @@ public class DetailedCourseActivity extends AppCompatActivity {
         }
     }
 
+    //Sets the text for editing course information
     public void getAndSetViewsById() {
         mNameText = findViewById(R.id.editCourseName);
-        mStartDate = findViewById(R.id.editCourseName);
-        mEndDate = findViewById(R.id.editCourseStart);
-        mStatus = findViewById(R.id.courseEndEdit);
-        mNotes = findViewById(R.id.optionalNote);
+        mStartDate = findViewById(R.id.editCourseStart);
+        mEndDate = findViewById(R.id.courseEndEdit);
+        mStatus = findViewById(R.id.statusEdit);
+        mNotes = findViewById(R.id.optionalNoteEdit);
     }
 
-    //3 methods for dating picking and formating
+    //3 methods  below for dating picking and formatting
 
     private void updateLabelStart() {
         String format = "MM/dd/yyyy";
@@ -190,7 +194,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
 
     public void getAllCourses() {
-        mCoursesList = mRepository.getAllCourses();
+        mCoursesList = repo.getAllCourses();
     }
     public void getSelectedCourse() {
 
@@ -216,5 +220,62 @@ public class DetailedCourseActivity extends AppCompatActivity {
     }
 
     public void saveCourse(View view) {
+
+        String title = mNameText.getText().toString();
+        String start = mStartDate.getText().toString();
+        String end = mEndDate.getText().toString();
+        String status = mStatus.getText().toString();
+        String optionalNote = mNotes.getText().toString();
+        Course course;
+
+        if(mCourseId == -1)
+        {
+//            if (title.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() || status.trim().isEmpty()) {
+//
+//
+//                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+//                alertDialog.setTitle("Empty Fields");
+//                alertDialog.setMessage("No fields can be left empty!");
+//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        });
+//                alertDialog.show();
+//
+//            }
+//            else {
+//
+//            }
+
+            if (optionalNote.trim().isEmpty()) {
+                optionalNote = " ";
+            }
+            List<Course> allCourses = repo.getAllCourses();
+            int coursesSize = allCourses.size();
+            int lastId = Integer.parseInt(String.valueOf(allCourses.get(coursesSize - 1).getCourseID()));
+            course = new Course(lastId + 1, title, start, end,status, optionalNote, mTermId.toString());
+            repo.insertCourse(course);
+
+            Intent intent = new Intent(this, CourseActivity.class);
+            startActivity(intent);
+        }
+        else{
+
+
+            // Prevents optional note from throwing a null pointer exception when not filled, put an empty string in
+            if (optionalNote.trim().isEmpty()) {
+                optionalNote = " ";
+            }
+
+            course = new Course(1, title, start, end,status, optionalNote, mTermId.toString());
+            repo.insertCourse(course);
+
+            Intent intent = new Intent(this, CourseActivity.class);
+            startActivity(intent);
+
+        }
     }
 }

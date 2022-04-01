@@ -17,7 +17,7 @@ public interface AssessmentDAO {
 
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAssessment(Assessment assessment);
 
     @Update
