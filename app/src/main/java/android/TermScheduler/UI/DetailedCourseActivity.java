@@ -68,8 +68,12 @@ public class DetailedCourseActivity extends AppCompatActivity {
         String myDateFormat = "MM/dd/yyyy";
         dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
 
-        mTermId = getIntent().getIntExtra("selectedTermId", -1);
+
         mCourseId = getIntent().getIntExtra("courseId", -1);
+        // Should be using this get for termId but can't seem to get it to work
+//        mTermId = getIntent().getIntExtra("termId", -1);
+
+        mTermId = DetailedTermActivity.getActiveTermID;
 
         repo = new Repository(getApplication());
 
@@ -86,6 +90,8 @@ public class DetailedCourseActivity extends AppCompatActivity {
         setDatePicker();
     }
 
+    //Methods dealing with instructors
+
     public void instructorAdd(View view) {
         Intent intent = new Intent(DetailedCourseActivity.this, InstructorActivity.class);
         intent.putExtra("courseId", mCourseId);
@@ -100,7 +106,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
                 listOfInstructors.add(instructor);
             }
         }
-//       Try getting all instructors first before narrowing it down to just those associated
+
     }
 
 
@@ -123,8 +129,8 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
             mRecyclerViewInstructor.setAdapter(mInstructorAdapter);
 
-
-            mInstructorAdapter.setInstructor(listOfInstructors);
+//Set adapter so that it points to an associated  instructor list
+            mInstructorAdapter.setInstructor(repo.getAllInstructor());
         }
     }
 
@@ -253,6 +259,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
             if (optionalNote.trim().isEmpty()) {
                 optionalNote = " ";
             }
+
             List<Course> allCourses = repo.getAllCourses();
             int coursesSize = allCourses.size();
             int lastId = Integer.parseInt(String.valueOf(allCourses.get(coursesSize - 1).getCourseID()));
@@ -270,12 +277,15 @@ public class DetailedCourseActivity extends AppCompatActivity {
                 optionalNote = " ";
             }
 
-            course = new Course(1, title, start, end,status, optionalNote, mTermId.toString());
+            course = new Course(mSelectedCourse.getCourseID(), title, start, end,status, optionalNote, mTermId.toString());
             repo.insertCourse(course);
 
             Intent intent = new Intent(this, CourseActivity.class);
             startActivity(intent);
 
         }
+    }
+
+    public void associatedAssessments(View view) {
     }
 }

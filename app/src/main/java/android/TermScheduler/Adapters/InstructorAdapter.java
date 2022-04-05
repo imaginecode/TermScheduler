@@ -16,77 +16,64 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.InstructorViewHolder> {
-    class InstructorViewHolder extends RecyclerView.ViewHolder{
-        private final TextView instructorItemView;
-        private final TextView instructorName;
-        private final TextView instructorEmail;
+    public List<Instructor> mInstructorList;
+    private Context context;
+    private LayoutInflater inflater;
 
+    public InstructorAdapter(Context context){
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+    }
 
-        private InstructorViewHolder(View itemView){
+    public class InstructorViewHolder extends RecyclerView.ViewHolder{
+        public TextView recyclerViewItemLayout;
+
+        public InstructorViewHolder(@NonNull View itemView) {
             super(itemView);
-            instructorItemView=itemView.findViewById(R.id.instructorName);
-            instructorName = itemView.findViewById(R.id.instructorName);
-            instructorEmail = itemView.findViewById(R.id.instructorEmail);
+            recyclerViewItemLayout = itemView.findViewById(R.id.item_layout);
 
-
-
-            itemView.setOnClickListener(new View.OnClickListener(){
-
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position=getAdapterPosition();
-                    final Instructor current=mInstructor.get(position);
-                    Intent intent = new Intent(context, InstructorActivity.class);
-                    intent.putExtra("instructorID", current.getInstructorID());
-                    intent.putExtra("instructorName", current.getInstructorName());
-                    intent.putExtra("email", current.getInstructorEmail());
-                    intent.putExtra("phone", current.getInstructorPhone());
+                    int position = getAdapterPosition();
+                    Instructor selected = mInstructorList.get(position);
+
+                    Intent intent = new Intent(context, InstructorActivity.class );
+                    intent.putExtra("instructorId", selected.getInstructorID() );
                     intent.putExtra("position", position);
+                    intent.putExtra("courseId", selected.getCourseID());
                     context.startActivity(intent);
                 }
             });
         }
     }
-    private List<Instructor> mInstructor;
-    private final Context context;
-    private final LayoutInflater mInflater;
 
-
-    public InstructorAdapter(Context context){
-        mInflater=LayoutInflater.from(context);
-        this.context=context;
-    }
     @NonNull
     @Override
     public InstructorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView=mInflater.inflate(R.layout.list_item,parent,false);
-        return new InstructorViewHolder(itemView);
+        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        return new InstructorViewHolder(view);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InstructorAdapter.InstructorViewHolder holder, int position) {
-        if(mInstructor!=null){
-            Instructor current=mInstructor.get(position);
-
-            holder.instructorItemView.setText(current.getInstructorName());
-            holder.instructorEmail.setText(current.getInstructorEmail());
-        }
-        else{
-            holder.instructorItemView.setText("Nada");
-            holder.instructorEmail.setText("Nada");
-        }
-    }
-    public void setInstructor(List<Instructor> instructors){
-        mInstructor=instructors;
-        notifyDataSetChanged();
+    public void onBindViewHolder(@NonNull InstructorViewHolder holder, int position) {
+        Instructor currentInstructor = mInstructorList.get(position);
+        holder.recyclerViewItemLayout.setText(currentInstructor.getInstructorName());
     }
 
     @Override
     public int getItemCount() {
-        if(mInstructor!=null){
-            return mInstructor.size();
-        }
-        else return 0;
+        return mInstructorList.size();
+    }
+
+    public Instructor getInstructorAt(int position){
+        return mInstructorList.get(position);
+    }
+
+    public void setInstructor(List<Instructor> instructor){
+        mInstructorList = instructor;
+        notifyDataSetChanged();
     }
 
 }

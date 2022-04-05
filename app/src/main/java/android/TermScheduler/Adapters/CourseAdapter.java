@@ -46,6 +46,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     Intent intent = new Intent(context, DetailedCourseActivity.class);
                     intent.putExtra("courseId", currentCourse.getCourseID());
                     intent.putExtra("position", position);
+                    intent.putExtra("termId", currentCourse.getTermID());
                     context.startActivity(intent);
 
                 }

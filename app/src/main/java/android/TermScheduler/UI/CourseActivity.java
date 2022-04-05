@@ -35,8 +35,9 @@ public class CourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         repo = new Repository(getApplication());
-        setCourseRecyclerAndAdapter();
         getAllCourses();
+        setCourseRecyclerAndAdapter();
+
 
 
     }
@@ -48,17 +49,17 @@ public class CourseActivity extends AppCompatActivity {
         mCourseAdapter = new CourseAdapter(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mCourseAdapter);
-
-        mCourseAdapter.setCourses(repo.getAllCourses());
+        mCourseAdapter.setCourses(associatedCourseList);
     }
 
     //filters out courses by term id
     public void getAllCourses() {
         mAllCourses = repo.getAllCourses();
+        //Dont think I need to set this as an array list
         associatedCourseList = new ArrayList<>();
         for (Course course : mAllCourses) {
-            if (course.getTermID() == "1" ) {
-//                DetailedTermActivity.getActiveTermID.toString()
+            if (course.getTermID().equals(DetailedTermActivity.getActiveTermID.toString())) {
+
                 associatedCourseList.add(course);
             }
         }
