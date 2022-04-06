@@ -94,14 +94,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesRecycler"
-        android:layout_width="414dp"
-        android:layout_height="124dp"
+        android:layout_width="410dp"
+        android:layout_height="243dp"
         android:layout_marginTop="25dp"
         android:background="@color/teal_700"
         app:layout_constraintBottom_toTopOf="@+id/deleteCourse"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionalNoteEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/optionalNoteEdit"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/optionalNoteEdit"

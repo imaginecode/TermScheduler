@@ -28,6 +28,8 @@ import java.util.Locale;
 
 public class DetailedCourseActivity extends AppCompatActivity {
 
+    public static Integer activeCourseID;
+
     EditText mNameText;
     EditText mStartDate;
     EditText mEndDate;
@@ -207,6 +209,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
         for (Course course : mCoursesList) {
             if (mCourseId == course.getCourseID()) {
                 mSelectedCourse = course;
+                activeCourseID = mSelectedCourse.getCourseID();
             }
         }
 

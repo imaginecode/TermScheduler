@@ -39,9 +39,9 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
                     Instructor selected = mInstructorList.get(position);
 
                     Intent intent = new Intent(context, InstructorActivity.class );
-                    intent.putExtra("instructorId", selected.getInstructorID() );
+                    intent.putExtra("instructorID", selected.getInstructorID() );
                     intent.putExtra("position", position);
-                    intent.putExtra("courseId", selected.getCourseID());
+                    intent.putExtra("courseID", selected.getCourseID());
                     context.startActivity(intent);
                 }
             });
