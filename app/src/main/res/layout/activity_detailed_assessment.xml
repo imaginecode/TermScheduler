@@ -138,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
+    <EditText
         android:id="@+id/AssessmentType"
         android:layout_width="119dp"
         android:layout_height="60dp"

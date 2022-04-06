@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_assessment_list.xml" value="0.33" />
-        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_course_list.xml" value="0.565625" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_course_list.xml" value="0.33" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_assessment.xml" value="0.4427083333333333" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_course_view.xml" value="0.5" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/activity_detailed_term_view.xml" value="0.5" />
@@ -16,6 +16,7 @@
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/instructor_list_item.xml" value="0.2554347826086957" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/list_item.xml" value="0.5" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout/term_list_item.xml" value="0.5" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/assessment_menu.xml" value="0.33" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/menu_termlist.xml" value="0.5" />
       </map>
     </option>

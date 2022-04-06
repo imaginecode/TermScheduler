@@ -67,9 +67,6 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
         return mInstructorList.size();
     }
 
-    public Instructor getInstructorAt(int position){
-        return mInstructorList.get(position);
-    }
 
     public void setInstructor(List<Instructor> instructor){
         mInstructorList = instructor;

@@ -290,5 +290,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
     }
 
     public void associatedAssessments(View view) {
+        Intent intent = new Intent(DetailedCourseActivity.this, AssessmentActivity.class);
+        startActivity(intent);
     }
 }

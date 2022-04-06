@@ -68,9 +68,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.recyclerViewItemLayout.setText(currentCourse.getCourseTitle());
     }
 
-    public Course getCourseAt(int position) {
-        return mCourseList.get(position);
-    }
 
     public void setCourses(List<Course> courses){
         mCourseList=courses;
