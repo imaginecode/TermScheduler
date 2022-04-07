@@ -10,19 +10,28 @@ import android.TermScheduler.Database.Repository;
 import android.TermScheduler.Entity.Course;
 import android.TermScheduler.Entity.Instructor;
 import android.TermScheduler.Entity.Term;
+import android.TermScheduler.Utilities.MyReceiver;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.TermScheduler.R;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -219,6 +228,72 @@ public class DetailedCourseActivity extends AppCompatActivity {
         mStatus.setText(mSelectedCourse.getCourseStatus());
         mNotes.setText(mSelectedCourse.getOptionalNote());
         mTermId = Integer.valueOf(mSelectedCourse.getTermID());
+    }
+
+    //Set course Notifications
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detailed_course_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.shareNote:
+                Intent notesIntent = new Intent();
+                notesIntent.setAction(Intent.ACTION_SEND);
+                notesIntent.putExtra(Intent.EXTRA_TEXT, mNotes.getText().toString());
+                notesIntent.putExtra(Intent.EXTRA_TITLE, "Sharing Note");
+                notesIntent.setType("text/plain");
+                Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
+                startActivity(noteIntentChooser);
+                return true;
+
+            case R.id.courseStartAlert:
+                String courseStartDate = mStartDate.getText().toString();
+                Date start = null;
+
+                try{
+                    start = dateFormatter.parse(courseStartDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                long startTrigger = start.getTime();
+                Intent startIntent = new Intent(DetailedCourseActivity.this, MyReceiver.class);
+                startIntent.putExtra("key", mSelectedCourse.getCourseTitle() + " course is beginning today");
+                Toast.makeText(DetailedCourseActivity.this, "Start notification set", Toast.LENGTH_SHORT).show();
+                PendingIntent startSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, startIntent, 0  );
+                AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                startAlarmManager.set(AlarmManager.RTC_WAKEUP,startTrigger,startSend);
+                return true;
+
+            case R.id.courseEndAlert:
+                String courseEndDate = mEndDate.getText().toString();
+                Date end = null;
+
+                try {
+                    end = dateFormatter.parse(courseEndDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Long endTrigger = end.getTime();
+                Intent endIntent = new Intent(DetailedCourseActivity.this, MyReceiver.class);
+                endIntent.putExtra("key", mSelectedCourse.getCourseTitle() + " course ends today!");
+                Toast.makeText(DetailedCourseActivity.this, "End notification set", Toast.LENGTH_SHORT);
+                PendingIntent endSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, endIntent, 0);
+                AlarmManager endAlarmManager = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
+                endAlarmManager.set(AlarmManager.RTC_WAKEUP,endTrigger,endSend);
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

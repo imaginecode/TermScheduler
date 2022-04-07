@@ -97,11 +97,9 @@
         android:layout_height="59dp"
         android:layout_marginTop="69dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="68dp"
         android:ems="10"
         android:hint="10/24/2022"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/assessmentType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/assessmentEnd"
         app:layout_constraintTop_toTopOf="@+id/assessmentStart" />
@@ -110,43 +108,37 @@
         android:id="@+id/saveAssessment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
+        android:layout_marginStart="28dp"
         android:layout_marginBottom="44dp"
         android:onClick="saveAssessment"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AssessmentType"
+        app:layout_constraintVertical_bias="0.833" />
 
     <Button
         android:id="@+id/deleteAssessment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
         android:layout_marginBottom="44dp"
         android:onClick="deleteAssessment"
         android:text="Delete Assessment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/notificationsOnOffAssessment"
-        app:layout_constraintStart_toEndOf="@+id/notificationsOnOffAssessment" />
-
-    <Switch
-        android:id="@+id/notificationsOnOffAssessment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Notifications ON/OFF"
-        app:layout_constraintBottom_toTopOf="@+id/deleteAssessment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/saveAssessment"
+        app:layout_constraintTop_toBottomOf="@+id/AssessmentType"
+        app:layout_constraintVertical_bias="0.846" />
 
     <EditText
         android:id="@+id/AssessmentType"
-        android:layout_width="119dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="99dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toEndOf="@+id/notificationsOnOffAssessment"
+        android:layout_width="181dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toEndOf="@+id/assessmentType"
-        app:layout_constraintTop_toTopOf="@+id/assessmentEnd" />
+        app:layout_constraintTop_toBottomOf="@+id/editEndDateAssessment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

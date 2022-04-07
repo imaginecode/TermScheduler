@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class DetailedAssessmentActivity extends AppCompatActivity {
 
-    EditText editTextName;
+    EditText editTextTitle;
     EditText editTextType;
     EditText editTextStart;
     EditText editTextEnd;
@@ -66,7 +66,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
         String myDateFormat = "MM/dd/yyyy";
         dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
 
-        mCourseID = getIntent().getIntExtra("courseID", -1);
+        mCourseID = DetailedCourseActivity.activeCourseID;
         mAssessmentID = getIntent().getIntExtra("assessmentID", -1);
 //        mAssessCourseId = getIntent().getIntExtra("assessCourseId", -1);
 
@@ -77,18 +77,26 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
             }
         }
 
-        editTextName = findViewById(R.id.editAssessmentTitle);
-        editTextType = findViewById(R.id.AssessmentType);
+        editTextTitle = findViewById(R.id.editAssessmentTitle);
         editTextStart = findViewById(R.id.editStartDateAssessment);
-        editTextEnd = findViewById(R.id.editStartDateAssessment);
+        editTextEnd = findViewById(R.id.editEndDateAssessment);
+        editTextType = findViewById(R.id.AssessmentType);
 
         if (mAssessmentID != -1) {
-            editTextName.setText(selectedAssessment.getAssessmentTitle());
-            editTextType.setText(selectedAssessment.getAssessmentType());
+            editTextTitle.setText(selectedAssessment.getAssessmentTitle());
             editTextStart.setText(selectedAssessment.getAssessmentStart());
             editTextEnd.setText(selectedAssessment.getAssessmentEnd());
+            editTextType.setText(selectedAssessment.getAssessmentType());
         }
 
+        setDates();
+
+
+    }
+
+    //Setting date pickers for start and end date fields
+
+    public void setDates(){
         mStartDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -122,10 +130,24 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
                         mCalendarEnd.get(Calendar.MONTH), mCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
     }
 
-//--------------------OnCreate------------------------------------//
+//Setting edit start and end fields
+    public void UpdateLabelStart() {
+        String format = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+
+        editTextStart.setText(sdf.format(mCalendarStart.getTime()));
+    }
+
+    public void UpdateLabelEnd(){
+        String format = "MM/dd/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(format,Locale.US);
+
+        editTextEnd.setText(sdf.format(mCalendarEnd.getTime()));
+    }
+
+//inflating menu for selecting assessment notifications
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,28 +209,29 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     }
 
 
+//save assessment
     public void saveAssessment(View view) {
 
-        String title, type, date, endDate;
+        String title, startDate, endDate,type;
 
-        title = editTextName.getText().toString();
-        type = editTextType.getText().toString();
-        date = editTextStart.getText().toString();
+        title = editTextTitle.getText().toString();
+        startDate = editTextStart.getText().toString();
         endDate = editTextEnd.getText().toString();
+        type = editTextType.getText().toString();
 
         mAssessmentList = repo.getAllAssessments();
-        int assessmentId = 1;
+        int assessmentID = 1;
         for (Assessment assessment : mAssessmentList) {
-            if (assessment.getAssessmentID() >= assessmentId) {
-                assessmentId = assessment.getAssessmentID();
+            if (assessment.getAssessmentID() >= assessmentID) {
+                assessmentID = assessment.getAssessmentID();
             }
         }
 
         if (mAssessmentID != -1) {
-            Assessment updatedAssessment = new Assessment(mAssessmentID, title, type, date, endDate, mCourseID);
+            Assessment updatedAssessment = new Assessment(mAssessmentID, title, startDate, endDate, type, mCourseID);
             repo.insertAssessment(updatedAssessment);
         } else {
-            Assessment newAssessment = new Assessment(++assessmentId, title, type, date, endDate,  mCourseID);
+            Assessment newAssessment = new Assessment(++assessmentID, title, startDate, endDate, type,  mCourseID);
             repo.insertAssessment(newAssessment);
         }
 
@@ -224,20 +247,9 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     }
 
 
-    public void UpdateLabelStart() {
-        String format = "MM/dd/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
 
-        editTextStart.setText(sdf.format(mCalendarStart.getTime()));
+
+
+    public void deleteAssessment(View view) {
     }
-
-    public void UpdateLabelEnd(){
-        String format = "MM/dd/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(format,Locale.US);
-
-        editTextEnd.setText(sdf.format(mCalendarEnd.getTime()));
-    }
-
-
-
 }
