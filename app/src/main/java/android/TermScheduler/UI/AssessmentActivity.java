@@ -46,7 +46,7 @@ public class AssessmentActivity extends AppCompatActivity {
         mAssessmentAdapter = new AssessmentAdapter(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAssessmentAdapter);
-        mAssessmentAdapter.setAssessments(repo.getAllAssessments());
+        mAssessmentAdapter.setAssessments(associatedAssessmentList);
     }
 
     //filters out assessments by course id

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class InstructorActivity extends AppCompatActivity {
     List<Course> mCourseList;
     Course mCourse;
 
-    Instructor selectedInstructor;
+    Instructor mSelectedInstructor;
 
     int mCourseID;
     int mInstructorID;
@@ -60,7 +61,7 @@ public class InstructorActivity extends AppCompatActivity {
         mInstructorList = repo.getAllInstructor();
         for (Instructor instructor: mInstructorList){
             if (instructor.getInstructorID() == mInstructorID){
-                selectedInstructor = instructor;
+                mSelectedInstructor = instructor;
             }
         }
 
@@ -69,9 +70,9 @@ public class InstructorActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editInstructorEmail);
 
         if (mInstructorID != -1 ){
-            editTextName.setText(selectedInstructor.getInstructorName());
-            editTextPhone.setText(selectedInstructor.getInstructorPhone());
-            editTextEmail.setText(selectedInstructor.getInstructorEmail());
+            editTextName.setText(mSelectedInstructor.getInstructorName());
+            editTextPhone.setText(mSelectedInstructor.getInstructorPhone());
+            editTextEmail.setText(mSelectedInstructor.getInstructorEmail());
         }
 
 
@@ -108,10 +109,10 @@ public class InstructorActivity extends AppCompatActivity {
 
         //Going back to Detailed Course activity
 
-        //This needs to be changed to a different intent or variable to keep track of courseID
+
         Intent intent = new Intent(this, DetailedCourseActivity.class);
 
-        intent.putExtra("courseId", DetailedCourseActivity.activeCourseID);
+        intent.putExtra("courseID", DetailedCourseActivity.activeCourseID);
 
         startActivity(intent);
 
@@ -125,5 +126,15 @@ public class InstructorActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void deleteInstructor(View view) {
+        repo.deleteInstructor(mSelectedInstructor);
+        Toast.makeText(InstructorActivity.this, "Instructor Deleted", Toast.LENGTH_LONG).show();
+
+        //Navigating back to Term list after clicking delete button
+        Intent intent = new Intent(this, DetailedCourseActivity.class);
+        intent.putExtra("courseID", DetailedCourseActivity.activeCourseID);
+        startActivity(intent);
     }
 }

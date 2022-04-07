@@ -38,12 +38,12 @@
             android:name=".UI.AssessmentActivity"
             android:exported="false"
             android:label="Assessment List"
-            android:parentActivityName=".UI.DetailedCourseActivity" />
+            android:parentActivityName=".UI.CourseActivity" />
         <activity
             android:name=".UI.CourseActivity"
             android:exported="false"
-            android:label="Course List"
-            android:parentActivityName=".UI.DetailedCourseActivity" />
+            android:label="Associated Course List"
+            android:parentActivityName=".UI.TermActivity" />
         <activity
             android:name=".UI.TermActivity"
             android:exported="false"

@@ -39,7 +39,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     List<Course> mCourseList;
     Course mCourse;
 
-    Assessment selectedAssessment;
+    Assessment mSelectedAssessment;
 
     Calendar mCalendarStart = Calendar.getInstance();
     Calendar mCalendarEnd = Calendar.getInstance();
@@ -73,7 +73,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
         mAssessmentList = repo.getAllAssessments();
         for (Assessment assessment : mAssessmentList) {
             if (assessment.getAssessmentID() == mAssessmentID) {
-                selectedAssessment = assessment;
+                mSelectedAssessment = assessment;
             }
         }
 
@@ -83,10 +83,10 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
         editTextType = findViewById(R.id.AssessmentType);
 
         if (mAssessmentID != -1) {
-            editTextTitle.setText(selectedAssessment.getAssessmentTitle());
-            editTextStart.setText(selectedAssessment.getAssessmentStart());
-            editTextEnd.setText(selectedAssessment.getAssessmentEnd());
-            editTextType.setText(selectedAssessment.getAssessmentType());
+            editTextTitle.setText(mSelectedAssessment.getAssessmentTitle());
+            editTextStart.setText(mSelectedAssessment.getAssessmentStart());
+            editTextEnd.setText(mSelectedAssessment.getAssessmentEnd());
+            editTextType.setText(mSelectedAssessment.getAssessmentType());
         }
 
         setDates();
@@ -177,7 +177,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
 
                 Long timeTrigger = startDate.getTime();
                 Intent intent = new Intent(DetailedAssessmentActivity.this, MyReceiver.class);
-                intent.putExtra("key", selectedAssessment.getAssessmentTitle() + " assessment starts today!");
+                intent.putExtra("key", mSelectedAssessment.getAssessmentTitle() + " assessment starts today!");
                 Toast.makeText(DetailedAssessmentActivity.this, "Notifications On ", Toast.LENGTH_SHORT).show();
 
                 PendingIntent send = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++,intent, 0);
@@ -197,7 +197,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
 
                 Long endTrigger = endDate.getTime();
                 Intent endIntent = new Intent(DetailedAssessmentActivity.this, MyReceiver.class);
-                endIntent.putExtra("key", selectedAssessment.getAssessmentTitle() + " assessment ends today!");
+                endIntent.putExtra("key", mSelectedAssessment.getAssessmentTitle() + " assessment ends today!");
                 Toast.makeText(DetailedAssessmentActivity.this, "Assessment end notification set", Toast.LENGTH_SHORT).show();
 
                 PendingIntent sendEnd = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++, endIntent, 0);
@@ -251,5 +251,11 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
 
 
     public void deleteAssessment(View view) {
+        repo.deleteAssessment(mSelectedAssessment);
+        Toast.makeText(DetailedAssessmentActivity.this, "Assessment Deleted", Toast.LENGTH_LONG).show();
+
+        //Navigating back to Term list after clicking delete button
+        Intent intent = new Intent(this, AssessmentActivity.class);
+        startActivity(intent);
     }
 }

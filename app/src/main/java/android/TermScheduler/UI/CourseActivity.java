@@ -55,7 +55,8 @@ public class CourseActivity extends AppCompatActivity {
     //filters out courses by term id
     public void getAllCourses() {
         mAllCourses = repo.getAllCourses();
-        //Dont think I need to set this as an array list
+
+        //Array
         associatedCourseList = new ArrayList<>();
         for (Course course : mAllCourses) {
             if (course.getTermID().equals(DetailedTermActivity.getActiveTermID.toString())) {

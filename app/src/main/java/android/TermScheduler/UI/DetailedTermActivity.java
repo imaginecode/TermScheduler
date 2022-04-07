@@ -2,7 +2,9 @@ package android.TermScheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.TermScheduler.Adapters.TermAdapter;
 import android.TermScheduler.Database.Repository;
+import android.TermScheduler.Entity.Course;
 import android.TermScheduler.Entity.Term;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +28,10 @@ import java.util.Locale;
 public class DetailedTermActivity extends AppCompatActivity {
 
     List<Term> termList;
+    List<Course> associatedCourseList;
     Repository repo;
+
+    TermAdapter mTermAdapter;
 
     EditText termName;
     EditText startDate;
@@ -62,8 +68,9 @@ public class DetailedTermActivity extends AppCompatActivity {
         repo = new Repository(getApplication());
 
         //Getting data for edit instead of create
-        getAndSetViewsById();
         getTerm();
+        getAndSetViewsById();
+
 
 //        setDatePicker();
 
@@ -213,12 +220,40 @@ public class DetailedTermActivity extends AppCompatActivity {
         }
 
     public void getAndSetViewsById() {
+        if(mTermId == -1) {
+            findViewById(R.id.deleteTerm).setVisibility(View.INVISIBLE);
+            findViewById(R.id.viewAssociatedCourses).setVisibility(View.INVISIBLE);
+        }
         termName = findViewById(R.id.editTermTitle);
         startDate = findViewById(R.id.editStartDateTerm);
         endDate = findViewById(R.id.editEndDateTerm);
     }
 
+// Checks to see if there are any courses associated so that the delete function can be performed
+    private boolean coursesAssociated(){
+        associatedCourseList = repo.getAllCourses();
+        for (Course course: associatedCourseList) {
+            if(course.getTermID().toString().equals(getActiveTermID.toString()))
+                return true;
+        }
+
+        return false;
+    }
+
+//Deletes term after checking for associated courses
     public void deleteTerm(View view) {
+
+        if(coursesAssociated()){
+            Toast.makeText(DetailedTermActivity.this, "Can't delete Courses Associated", Toast.LENGTH_LONG).show();
+        }
+        else{
+            repo.deleteTerm(mSelectedTerm);
+            Toast.makeText(DetailedTermActivity.this, "Term Deleted", Toast.LENGTH_LONG).show();
+
+            //Navigating back to Term list after clicking delete button
+            Intent intent = new Intent(this, TermActivity.class);
+            startActivity(intent);
+        }
 
 
     }

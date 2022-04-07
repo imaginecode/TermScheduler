@@ -59,7 +59,8 @@ public class DetailedCourseActivity extends AppCompatActivity {
     List<Course> mCoursesList;
     Course mSelectedCourse;
 
-    List<Instructor> listOfInstructors;
+    List<Instructor> mAssociatedInstructorList;
+    List<Instructor> mInstructorList;
 
     private RecyclerView mRecyclerViewInstructor;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -80,7 +81,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
         dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
 
 
-        mCourseId = getIntent().getIntExtra("courseId", -1);
+        mCourseId = getIntent().getIntExtra("courseID", -1);
         // Should be using this get for termId but can't seem to get it to work
 //        mTermId = getIntent().getIntExtra("termId", -1);
 
@@ -91,9 +92,10 @@ public class DetailedCourseActivity extends AppCompatActivity {
         getAndSetViewsById();
 
         getAllCourses();
+        getSelectedCourse();
 
 
-        getInstructorsInCourse();
+        getAllInstructors();
 
         setRecyclerViews();
 
@@ -109,17 +111,18 @@ public class DetailedCourseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getInstructorsInCourse() {
-        listOfInstructors = new ArrayList<>();
-        List<Instructor> list = repo.getAllInstructor();
-        for (Instructor instructor : list){
-            if (instructor.getCourseID() == mCourseId){
-                listOfInstructors.add(instructor);
+    public void getAllInstructors() {
+        mInstructorList = repo.getAllInstructor();
+        mAssociatedInstructorList = new ArrayList<>();
+        for (Instructor instructor : mInstructorList) {
+            if (Integer.valueOf(instructor.getCourseID()).equals(DetailedCourseActivity.activeCourseID)) {
+
+                mAssociatedInstructorList.add(instructor);
             }
         }
-
     }
 
+    
 
 
     public void setRecyclerViews() {
@@ -140,8 +143,8 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
             mRecyclerViewInstructor.setAdapter(mInstructorAdapter);
 
-//Set adapter so that it points to an associated  instructor list
-            mInstructorAdapter.setInstructor(repo.getAllInstructor());
+
+            mInstructorAdapter.setInstructor(mAssociatedInstructorList);
         }
     }
 
@@ -299,10 +302,17 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
 
 
-
+    //Deleting Course, No need to check for associated assessments as that is not specified in the requirements
     public void deleteCourse(View view) {
+        repo.deleteCourse(mSelectedCourse);
+        Toast.makeText(DetailedCourseActivity.this, "Course Deleted", Toast.LENGTH_LONG).show();
+
+        //Navigating back to Term list after clicking delete button
+        Intent intent = new Intent(this, CourseActivity.class);
+        startActivity(intent);
     }
 
+    //Saves course and also checks for empty fields
     public void saveCourse(View view) {
 
         String title = mNameText.getText().toString();
@@ -350,7 +360,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
         else{
 
 
-            // Prevents optional note from throwing a null pointer exception when not filled, put an empty string in
+            // Prevents optional note from throwing a null pointer exception when not filled, puts an empty string in
             if (optionalNote.trim().isEmpty()) {
                 optionalNote = " ";
             }

@@ -6,24 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".UI.AssessmentActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assessmentRecycler"
-        android:layout_width="416dp"
-        android:layout_height="618dp"
-        android:background="@color/teal_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/addAssessment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:text="Add Assessment"
         android:onClick="addAssessment"
+        android:text="Add Assessment"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="489dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/addAssessment"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentRecycler"
-        app:layout_constraintVertical_bias="0.877" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/assessmentRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/teal_700"
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="437dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
