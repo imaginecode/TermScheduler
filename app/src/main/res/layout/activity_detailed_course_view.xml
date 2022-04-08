@@ -76,7 +76,8 @@
         android:layout_height="42dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="128dp"
-        android:hint=" Course Start"
+        android:hint="12/24/2022"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/courseStart"
         app:layout_constraintTop_toTopOf="@+id/courseStart" />
@@ -87,7 +88,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="152dp"
-        android:hint=" Course End"
+        android:hint="12/24/2022"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/courseEnd"
         app:layout_constraintTop_toBottomOf="@+id/editCourseStart" />

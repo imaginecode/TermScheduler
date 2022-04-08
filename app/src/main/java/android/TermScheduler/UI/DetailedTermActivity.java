@@ -72,8 +72,33 @@ public class DetailedTermActivity extends AppCompatActivity {
         getAndSetViewsById();
 
 
-//        setDatePicker();
+        setDatePicker();
 
+
+
+
+    }
+
+    public void getTerm() {
+        mTermId = getIntent().getIntExtra("termId", -1);
+        for (Term term : repo.getAllTerms()) {
+            if (term.getTermID() == mTermId) {
+                mSelectedTerm = term;
+                getActiveTermID = term.getTermID();
+            }
+        }
+        if (mSelectedTerm != null) {
+            mName = mSelectedTerm.getTermTitle();
+            mStartD = mSelectedTerm.getTermStart();
+            mEndD = mSelectedTerm.getTermEnd();
+        }
+        termName.setText(mName);
+        startDate.setText(mStartD);
+        endDate.setText(mEndD);
+    }
+
+    //Sets date picker format and sets on click listeners
+    public void setDatePicker() {
         mStartDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -109,26 +134,6 @@ public class DetailedTermActivity extends AppCompatActivity {
                         , mCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
-    }
-
-    public void getTerm() {
-        mTermId = getIntent().getIntExtra("termId", -1);
-        for (Term term : repo.getAllTerms()) {
-            if (term.getTermID() == mTermId) {
-                mSelectedTerm = term;
-                getActiveTermID = term.getTermID();
-            }
-        }
-        if (mSelectedTerm != null) {
-            mName = mSelectedTerm.getTermTitle();
-            mStartD = mSelectedTerm.getTermStart();
-            mEndD = mSelectedTerm.getTermEnd();
-        }
-        termName.setText(mName);
-        startDate.setText(mStartD);
-        endDate.setText(mEndD);
     }
 
     public void saveTerm(View view) {
@@ -137,15 +142,15 @@ public class DetailedTermActivity extends AppCompatActivity {
         String end = endDate.getText().toString();
         Term term;
 
-
+// If the term is a new term check to make sure all fields are populated if not give an error box
         if(mTermId == -1)
         {
             if (title.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
 
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("Empty Fields");
-                alertDialog.setMessage("No fields can be left empty!");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
+                alertDialog.setTitle("Empty Text Fields");
+                alertDialog.setMessage("No  text fields can be left empty!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "I Understand",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

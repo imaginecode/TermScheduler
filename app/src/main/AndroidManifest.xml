@@ -23,7 +23,7 @@
             android:name=".UI.InstructorActivity"
             android:exported="false"
             android:label="Instructor Details"
-            android:parentActivityName=".UI.CourseActivity" />
+            android:parentActivityName=".UI.DetailedCourseActivity" />
         <activity
             android:name=".UI.DetailedTermActivity"
             android:exported="false"

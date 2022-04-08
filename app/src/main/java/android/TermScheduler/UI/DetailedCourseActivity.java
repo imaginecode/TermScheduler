@@ -74,33 +74,66 @@ public class DetailedCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_course_view);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         String myDateFormat = "MM/dd/yyyy";
         dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
 
-
-        mCourseId = getIntent().getIntExtra("courseID", -1);
-        // Should be using this get for termId but can't seem to get it to work
-//        mTermId = getIntent().getIntExtra("termId", -1);
-
+        repo = new Repository(getApplication());
         mTermId = DetailedTermActivity.getActiveTermID;
 
-        repo = new Repository(getApplication());
-
-        getAndSetViewsById();
-
-        getAllCourses();
-        getSelectedCourse();
+        //gets and sets course information depending on if this is a new course being created or if its being edited
+        getCourse();
 
 
+
+
+
+        //Setting up Instructor Recycler
         getAllInstructors();
-
-        setRecyclerViews();
-
+        setInstructorRecyclerView();
 
         setDatePicker();
+    }
+
+    public void getCourse() {
+        mCourseId = getIntent().getIntExtra("courseID", -1);
+        //all courses
+        mCoursesList = repo.getAllCourses();
+
+        //getting selected course
+        for (Course course : mCoursesList) {
+            if (mCourseId == course.getCourseID()) {
+                mSelectedCourse = course;
+                activeCourseID = mSelectedCourse.getCourseID();
+            }
+        }
+
+                if(mCourseId == -1) {
+            findViewById(R.id.goToAssociatedAssessments).setVisibility(View.INVISIBLE);
+            findViewById(R.id.addInstructor).setVisibility(View.INVISIBLE);
+            findViewById(R.id.deleteCourse).setVisibility(View.INVISIBLE);
+
+
+        }
+        mNameText = findViewById(R.id.editCourseName);
+        mStartDate = findViewById(R.id.editCourseStart);
+        mEndDate = findViewById(R.id.courseEndEdit);
+        mStatus = findViewById(R.id.statusEdit);
+        mNotes = findViewById(R.id.optionalNoteEdit);
+
+
+
+        if(mCourseId != -1){
+            mNameText.setText(mSelectedCourse.getCourseTitle());
+            mStartDate.setText(mSelectedCourse.getStartDate());
+            mEndDate.setText(mSelectedCourse.getEndDate());
+            mStatus.setText(mSelectedCourse.getCourseStatus());
+            mNotes.setText(mSelectedCourse.getOptionalNote());
+            mTermId = Integer.valueOf(mSelectedCourse.getTermID());
+        }
     }
 
     //Methods dealing with instructors
@@ -125,37 +158,19 @@ public class DetailedCourseActivity extends AppCompatActivity {
     
 
 
-    public void setRecyclerViews() {
+    public void setInstructorRecyclerView() {
         if (mCourseId != -1) {
-            getSelectedCourse();
-
-
+//            getSelectedCourse();
             mRecyclerViewInstructor = findViewById(R.id.coursesRecycler);
-
             mLayoutManager = new LinearLayoutManager(this);
-
-
             mInstructorAdapter = new InstructorAdapter(this);
-
-
             mRecyclerViewInstructor.setLayoutManager(mLayoutManager);
-
-
             mRecyclerViewInstructor.setAdapter(mInstructorAdapter);
-
-
             mInstructorAdapter.setInstructor(mAssociatedInstructorList);
         }
     }
 
-    //Sets the text for editing course information
-    public void getAndSetViewsById() {
-        mNameText = findViewById(R.id.editCourseName);
-        mStartDate = findViewById(R.id.editCourseStart);
-        mEndDate = findViewById(R.id.courseEndEdit);
-        mStatus = findViewById(R.id.statusEdit);
-        mNotes = findViewById(R.id.optionalNoteEdit);
-    }
+
 
     //3 methods  below for dating picking and formatting
 
@@ -213,25 +228,7 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
 
 
-    public void getAllCourses() {
-        mCoursesList = repo.getAllCourses();
-    }
-    public void getSelectedCourse() {
 
-        for (Course course : mCoursesList) {
-            if (mCourseId == course.getCourseID()) {
-                mSelectedCourse = course;
-                activeCourseID = mSelectedCourse.getCourseID();
-            }
-        }
-
-        mNameText.setText(mSelectedCourse.getCourseTitle());
-        mStartDate.setText(mSelectedCourse.getStartDate());
-        mEndDate.setText(mSelectedCourse.getEndDate());
-        mStatus.setText(mSelectedCourse.getCourseStatus());
-        mNotes.setText(mSelectedCourse.getOptionalNote());
-        mTermId = Integer.valueOf(mSelectedCourse.getTermID());
-    }
 
     //Set course Notifications
     @Override

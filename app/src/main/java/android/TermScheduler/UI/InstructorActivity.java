@@ -65,6 +65,10 @@ public class InstructorActivity extends AppCompatActivity {
             }
         }
 
+        if(mInstructorID == -1) {
+            findViewById(R.id.deleteInstructor).setVisibility(View.INVISIBLE);
+        }
+
         editTextName = findViewById(R.id.editInstructorName);
         editTextPhone = findViewById(R.id.editInstructorPhone);
         editTextEmail = findViewById(R.id.editInstructorEmail);
@@ -110,7 +114,7 @@ public class InstructorActivity extends AppCompatActivity {
         //Going back to Detailed Course activity
 
 
-        Intent intent = new Intent(this, DetailedCourseActivity.class);
+        Intent intent = new Intent(InstructorActivity.this, DetailedCourseActivity.class);
 
         intent.putExtra("courseID", DetailedCourseActivity.activeCourseID);
 

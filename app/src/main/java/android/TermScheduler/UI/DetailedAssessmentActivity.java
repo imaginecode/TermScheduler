@@ -59,22 +59,41 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_assessment);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        repo = new Repository(getApplication());
 
         String myDateFormat = "MM/dd/yyyy";
         dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
 
+        repo = new Repository(getApplication());
+
+
+        setAssessmentViews();
+
+
+
+        setDates();
+
+
+    }
+
+    // Setting assessment Views and populating editTexts
+    public void setAssessmentViews(){
+
+
         mCourseID = DetailedCourseActivity.activeCourseID;
         mAssessmentID = getIntent().getIntExtra("assessmentID", -1);
-//        mAssessCourseId = getIntent().getIntExtra("assessCourseId", -1);
 
         mAssessmentList = repo.getAllAssessments();
         for (Assessment assessment : mAssessmentList) {
             if (assessment.getAssessmentID() == mAssessmentID) {
                 mSelectedAssessment = assessment;
             }
+        }
+
+        if(mAssessmentID == -1) {
+            findViewById(R.id.deleteAssessment).setVisibility(View.INVISIBLE);
         }
 
         editTextTitle = findViewById(R.id.editAssessmentTitle);
@@ -88,10 +107,6 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
             editTextEnd.setText(mSelectedAssessment.getAssessmentEnd());
             editTextType.setText(mSelectedAssessment.getAssessmentType());
         }
-
-        setDates();
-
-
     }
 
     //Setting date pickers for start and end date fields
