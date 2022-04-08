@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.AssessmentViewHolder> {
-    public List<Assessment> mAssessmentList;
+    public List<Assessment> assessmentList;
     private Context context;
     private LayoutInflater inflater;
 
@@ -29,26 +29,25 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         public TextView recyclerViewItemLayout;
 
         public AssessmentViewHolder(@NonNull View itemView) {
+
             super(itemView);
             recyclerViewItemLayout = itemView.findViewById(R.id.item_layout);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
                     int position = getAdapterPosition();
-                    Assessment current = mAssessmentList.get(position);
-
+                    Assessment currentAssessment = assessmentList.get(position);
                     Intent intent = new Intent(context, DetailedAssessmentActivity.class);
-                    intent.putExtra("assessmentID", current.getAssessmentID());
+                    intent.putExtra("assessmentID", currentAssessment.getAssessmentID());
                     intent.putExtra("position", position);
-                    intent.putExtra("courseID", current.getCourseID());
+                    intent.putExtra("courseID", currentAssessment.getCourseID());
                     context.startActivity(intent);
                 }
             });
-
         }
     }
-
 
     @NonNull
     @Override
@@ -57,23 +56,22 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         return new AssessmentViewHolder(v);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull AssessmentViewHolder holder, int position) {
-        Assessment currentAssessment = mAssessmentList.get(position);
+        Assessment currentAssessment = assessmentList.get(position);
         holder.recyclerViewItemLayout.setText(currentAssessment.getAssessmentTitle());
+    }
+
+    public void setAssessments(List<Assessment> assessments) {
+        assessmentList = assessments;
+        notifyDataSetChanged();
     }
 
 
     @Override
     public int getItemCount() {
-        return mAssessmentList.size();
+        return assessmentList.size();
     }
 
-
-    public void setAssessments(List<Assessment> assessments) {
-        mAssessmentList = assessments;
-        notifyDataSetChanged();
-    }
 
 }

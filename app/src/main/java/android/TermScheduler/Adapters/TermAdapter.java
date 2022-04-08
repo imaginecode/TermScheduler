@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
 
-    public List<Term> mTermsList;
+    public List<Term> termList;
     private Context context;
     private LayoutInflater inflater;
 
@@ -26,20 +26,20 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         this.context = context;
     }
 
-    // CLASS
-    public class TermViewHolder extends RecyclerView.ViewHolder {
-        public TextView itemStructureRecycler;
 
+
+    // inner class
+    public class TermViewHolder extends RecyclerView.ViewHolder {
+        public TextView itemRecycler;
         private TermViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemStructureRecycler = itemView.findViewById(R.id.item_layout);
-            //todo add course here
-
+            itemRecycler = itemView.findViewById(R.id.item_layout);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
                     int position = getAdapterPosition();
-                    Term currentTerm = mTermsList.get(position);
+                    Term currentTerm = termList.get(position);
 
                     Intent intent = new Intent(context, DetailedTermActivity.class);
                     intent.putExtra("termId", currentTerm.getTermID());
@@ -47,36 +47,30 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     context.startActivity(intent);
                 }
             });
-
         }
     }
-
 
     @NonNull
     @Override
     public TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        return new TermViewHolder(v);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        return new TermViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TermViewHolder holder, int position) {
-        Term currentTerm = mTermsList.get(position);
-        holder.itemStructureRecycler.setText(currentTerm.getTermTitle());
+        Term currentTerm = termList.get(position);
+        holder.itemRecycler.setText(currentTerm.getTermTitle());
+    }
+
+    public void termsSetter(List<Term> terms) {
+        termList = terms;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mTermsList.size();
-    }
-
-    public Term getTermAt(int position) {
-        return mTermsList.get(position);
-    }
-
-    public void termsSetter(List<Term> terms) {
-        mTermsList = terms;
-        notifyDataSetChanged();
+        return termList.size();
     }
 
 }

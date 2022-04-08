@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_assessment_list.xml" value="0.47883597883597884" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_course_list.xml" value="0.47883597883597884" />
-        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_detailed_assessment.xml" value="0.47883597883597884" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_detailed_assessment.xml" value="0.25" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_detailed_course_view.xml" value="0.5" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_detailed_term_view.xml" value="0.47883597883597884" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/layout-land/activity_instructor_add.xml" value="0.47883597883597884" />
@@ -28,6 +28,8 @@
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/assessment_menu.xml" value="0.33" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/detailed_course_menu.xml" value="0.565625" />
         <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/menu/menu_termlist.xml" value="0.5" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/creat/AndroidStudioProjects/TermSchedulerBrandonClay/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

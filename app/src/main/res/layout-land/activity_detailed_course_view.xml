@@ -32,8 +32,8 @@
 
             <EditText
                 android:id="@+id/editCourseName"
-                android:layout_width="152dp"
-                android:layout_height="wrap_content"
+                android:layout_width="692dp"
+                android:layout_height="57dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="115dp"
                 android:layout_marginBottom="34dp"
@@ -58,7 +58,7 @@
 
             <EditText
                 android:id="@+id/editCourseStart"
-                android:layout_width="148dp"
+                android:layout_width="688dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="128dp"
@@ -82,8 +82,8 @@
 
             <EditText
                 android:id="@+id/courseEndEdit"
-                android:layout_width="147dp"
-                android:layout_height="61dp"
+                android:layout_width="686dp"
+                android:layout_height="55dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="152dp"
                 android:hint="12/24/2022"
@@ -104,8 +104,8 @@
 
             <EditText
                 android:id="@+id/statusEdit"
-                android:layout_width="315dp"
-                android:layout_height="67dp"
+                android:layout_width="685dp"
+                android:layout_height="57dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="25dp"
                 android:hint="in progress, completed, dropped, plan to take"
@@ -115,21 +115,9 @@
                 app:layout_constraintStart_toEndOf="@+id/status"
                 app:layout_constraintTop_toBottomOf="@+id/courseEndEdit" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/coursesRecycler"
-                android:layout_width="312dp"
-                android:layout_height="158dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@color/teal_700"
-                app:layout_constraintBottom_toTopOf="@+id/optionalNoteEdit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
             <EditText
                 android:id="@+id/optionalNoteEdit"
-                android:layout_width="346dp"
+                android:layout_width="661dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="76dp"
@@ -141,25 +129,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/statusEdit" />
 
-            <Button
-                android:id="@+id/goToAssociatedAssessments"
-                android:layout_width="195dp"
-                android:layout_height="70dp"
-                android:layout_marginEnd="376dp"
-                android:onClick="associatedAssessments"
-                android:text="Associated Assessments"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/coursesRecycler"
+                android:layout_width="312dp"
+                android:layout_height="158dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/teal_700"
+                app:layout_constraintBottom_toTopOf="@+id/optionalNoteEdit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" >
 
-            <Button
-                android:id="@+id/deleteCourse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:onClick="instructorAdd"
-                android:text="Add Instructor"
-                app:layout_constraintBottom_toTopOf="@+id/saveCourse"
-                app:layout_constraintStart_toStartOf="parent" />
+            </androidx.recyclerview.widget.RecyclerView>
 
             <Button
                 android:id="@+id/addInstructor"
@@ -173,6 +155,16 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
+                android:id="@+id/deleteCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:onClick="instructorAdd"
+                android:text="Add Instructor"
+                app:layout_constraintBottom_toTopOf="@+id/saveCourse"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
                 android:id="@+id/saveCourse"
                 android:layout_width="138dp"
                 android:layout_height="66dp"
@@ -180,6 +172,17 @@
                 android:text="Save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/goToAssociatedAssessments"
+                android:layout_width="195dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="376dp"
+                android:onClick="associatedAssessments"
+                android:text="Associated Assessments"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </LinearLayout>
     </ScrollView>
 

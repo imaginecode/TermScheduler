@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface AssessmentDAO {
 
-
+//adding addition functions to DOA for further extension possibility
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAssessment(Assessment assessment);

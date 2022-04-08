@@ -70,12 +70,7 @@ public class DetailedTermActivity extends AppCompatActivity {
         //Getting data for edit instead of create
         getTerm();
         getAndSetViewsById();
-
-
         setDatePicker();
-
-
-
 
     }
 
@@ -106,7 +101,7 @@ public class DetailedTermActivity extends AppCompatActivity {
                 mCalendarStart.set(Calendar.MONTH, month);
                 mCalendarStart.set(Calendar.DAY_OF_MONTH, day);
 
-                updateLabelStart();
+                updateDateStartTxt();
             }
         };
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +119,7 @@ public class DetailedTermActivity extends AppCompatActivity {
                 mCalendarEnd.set(Calendar.DAY_OF_MONTH, day);
                 String myFormat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                updateLabelEnd();
+                updateDateEndTxt();
             }
         };
         endDate.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +156,6 @@ public class DetailedTermActivity extends AppCompatActivity {
 
             }
             else {
-
                 List<Term> allTerms = repo.getAllTerms();
                 int termsSize = allTerms.size();
                 if (!allTerms.isEmpty()) {
@@ -169,9 +163,8 @@ public class DetailedTermActivity extends AppCompatActivity {
 
                     term = new Term(lastId + 1, title, start, end);
 
-                } else {
-                    term = new Term(1, title, start, end);
                 }
+                else { term = new Term(1, title, start, end); }
 
                 repo.insertTerm(term);
                 //Navigating back to Term list after clicking save button
@@ -193,24 +186,16 @@ public class DetailedTermActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-        private void updateLabelStart() {
+        private void updateDateStartTxt() {
             String format = "MM/dd/yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-
             startDate.setText(sdf.format(mCalendarStart.getTime()));
-
         }
 
-        private void updateLabelEnd() {
+        private void updateDateEndTxt() {
             String format = "MM/dd/yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
             endDate.setText(sdf.format(mCalendarEnd.getTime()));
-
         }
 
 
@@ -241,7 +226,6 @@ public class DetailedTermActivity extends AppCompatActivity {
             if(course.getTermID().toString().equals(getActiveTermID.toString()))
                 return true;
         }
-
         return false;
     }
 

@@ -14,6 +14,8 @@ import java.util.List;
 
 @Dao
 public interface CourseDAO {
+
+    //adding addition functions to DOA for further extension possibility
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCourse(Course course);
 

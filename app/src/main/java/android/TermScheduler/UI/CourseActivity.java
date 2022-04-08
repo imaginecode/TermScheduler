@@ -38,8 +38,6 @@ public class CourseActivity extends AppCompatActivity {
         getAllCourses();
         setCourseRecyclerAndAdapter();
 
-
-
     }
 
 

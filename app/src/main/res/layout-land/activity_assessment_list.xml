@@ -12,18 +12,21 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="803dp"
-        android:layout_marginStart="175dp"
+        android:layout_marginStart="284dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="5dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addAssessment"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.172">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/assessmentRecycler"
             android:layout_width="381dp"
-            android:layout_height="227dp"
+            android:layout_height="334dp"
             android:background="@color/teal_700">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -34,7 +37,8 @@
         android:id="@+id/addAssessment"
         android:layout_width="0dp"
         android:layout_height="85dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="152dp"
         android:onClick="addAssessment"
         android:text="Add Assessment"
         app:layout_constraintBottom_toBottomOf="parent"

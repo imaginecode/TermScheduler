@@ -8,9 +8,11 @@ import android.TermScheduler.Entity.Course;
 import android.TermScheduler.R;
 import android.TermScheduler.Utilities.MyReceiver;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,29 +31,23 @@ import java.util.Locale;
 
 public class DetailedAssessmentActivity extends AppCompatActivity {
 
-    EditText editTextTitle;
-    EditText editTextType;
-    EditText editTextStart;
-    EditText editTextEnd;
-
+    EditText editTitle;
+    EditText editType;
+    EditText editStart;
+    EditText editEnd;
     Repository repo;
     List<Assessment> mAssessmentList;
-    List<Course> mCourseList;
-    Course mCourse;
 
     Assessment mSelectedAssessment;
-
     Calendar mCalendarStart = Calendar.getInstance();
     Calendar mCalendarEnd = Calendar.getInstance();
-
     DatePickerDialog.OnDateSetListener mStartDatePicker;
     DatePickerDialog.OnDateSetListener mEndDatePicker;
-
-    SimpleDateFormat dateFormatter;
-
+    SimpleDateFormat sdf;
     int mCourseID;
     int mAssessmentID;
-//    int mAssessCourseID;
+
+
 
 
 
@@ -59,23 +55,16 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_assessment);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         String myDateFormat = "MM/dd/yyyy";
-        dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
-
+        sdf = new SimpleDateFormat(myDateFormat, Locale.US);
         repo = new Repository(getApplication());
-
 
         setAssessmentViews();
 
-
-
         setDates();
-
-
     }
 
     // Setting assessment Views and populating editTexts
@@ -96,16 +85,16 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
             findViewById(R.id.deleteAssessment).setVisibility(View.INVISIBLE);
         }
 
-        editTextTitle = findViewById(R.id.editAssessmentTitle);
-        editTextStart = findViewById(R.id.editStartDateAssessment);
-        editTextEnd = findViewById(R.id.editEndDateAssessment);
-        editTextType = findViewById(R.id.AssessmentType);
+        editTitle = findViewById(R.id.editAssessmentTitle);
+        editStart = findViewById(R.id.editStartDateAssessment);
+        editEnd = findViewById(R.id.editEndDateAssessment);
+        editType = findViewById(R.id.AssessmentType);
 
         if (mAssessmentID != -1) {
-            editTextTitle.setText(mSelectedAssessment.getAssessmentTitle());
-            editTextStart.setText(mSelectedAssessment.getAssessmentStart());
-            editTextEnd.setText(mSelectedAssessment.getAssessmentEnd());
-            editTextType.setText(mSelectedAssessment.getAssessmentType());
+            editTitle.setText(mSelectedAssessment.getAssessmentTitle());
+            editStart.setText(mSelectedAssessment.getAssessmentStart());
+            editEnd.setText(mSelectedAssessment.getAssessmentEnd());
+            editType.setText(mSelectedAssessment.getAssessmentType());
         }
     }
 
@@ -118,7 +107,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
                 mCalendarStart.set(Calendar.YEAR, year);
                 mCalendarStart.set(Calendar.MONTH, month);
                 mCalendarStart.set(Calendar.DAY_OF_MONTH, day);
-                UpdateLabelStart();
+                updateDateStartText();
             }
         };
         mEndDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -127,18 +116,18 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
                 mCalendarEnd.set(Calendar.YEAR, year);
                 mCalendarEnd.set(Calendar.MONTH, month);
                 mCalendarEnd.set(Calendar.DAY_OF_MONTH, day);
-                UpdateLabelEnd();
+                updateDateEndText();
             }
         };
 
-        editTextStart.setOnClickListener(new View.OnClickListener() {
+        editStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(DetailedAssessmentActivity.this, mStartDatePicker, mCalendarStart.get(Calendar.YEAR)
                         , mCalendarStart.get(Calendar.MONTH), mCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        editTextEnd.setOnClickListener(new View.OnClickListener() {
+        editEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(DetailedAssessmentActivity.this, mEndDatePicker, mCalendarEnd.get(Calendar.YEAR),
@@ -148,18 +137,18 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     }
 
 //Setting edit start and end fields
-    public void UpdateLabelStart() {
+    public void updateDateStartText() {
         String format = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
 
-        editTextStart.setText(sdf.format(mCalendarStart.getTime()));
+        editStart.setText(sdf.format(mCalendarStart.getTime()));
     }
 
-    public void UpdateLabelEnd(){
+    public void updateDateEndText(){
         String format = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(format,Locale.US);
 
-        editTextEnd.setText(sdf.format(mCalendarEnd.getTime()));
+        editEnd.setText(sdf.format(mCalendarEnd.getTime()));
     }
 
 //inflating menu for selecting assessment notifications
@@ -175,17 +164,17 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
+        try{switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
 
             case R.id.assessmentStartNotification:
-                String editTextDate = editTextStart.getText().toString();
+                String editTextDate = editStart.getText().toString();
                 Date startDate = null;
 
                 try {
-                    startDate = dateFormatter.parse(editTextDate);
+                    startDate = sdf.parse(editTextDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -195,17 +184,17 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
                 intent.putExtra("key", mSelectedAssessment.getAssessmentTitle() + " assessment starts today!");
                 Toast.makeText(DetailedAssessmentActivity.this, "Notifications On ", Toast.LENGTH_SHORT).show();
 
-                PendingIntent send = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++,intent, 0);
+                PendingIntent send = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++,intent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP,timeTrigger, send);
                 return true;
 
             case R.id.assessmentEndNotification:
-                String editTextEndDate = editTextEnd.getText().toString();
+                String editTextEndDate = editEnd.getText().toString();
                 Date endDate = null;
 
                 try {
-                    endDate = dateFormatter.parse(editTextEndDate);
+                    endDate = sdf.parse(editTextEndDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -215,11 +204,25 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
                 endIntent.putExtra("key", mSelectedAssessment.getAssessmentTitle() + " assessment ends today!");
                 Toast.makeText(DetailedAssessmentActivity.this, "Assessment end notification set", Toast.LENGTH_SHORT).show();
 
-                PendingIntent sendEnd = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++, endIntent, 0);
+                PendingIntent sendEnd = PendingIntent.getBroadcast(DetailedAssessmentActivity.this, MainActivity.alertNum++, endIntent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager endAlarmManger = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 endAlarmManger.set(AlarmManager.RTC_WAKEUP,endTrigger,sendEnd);
                 return true;
+        }}
+        catch(Exception e){
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Save Assessment before setting alert");
+            alertDialog.setMessage("Assessment must be saved before setting alert!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -227,41 +230,61 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
 //save assessment
     public void saveAssessment(View view) {
 
-        String title, startDate, endDate,type;
+        String assessmentName, startDate, endDate,type;
 
-        title = editTextTitle.getText().toString();
-        startDate = editTextStart.getText().toString();
-        endDate = editTextEnd.getText().toString();
-        type = editTextType.getText().toString();
+
+        assessmentName = editTitle.getText().toString();
+        startDate = editStart.getText().toString();
+        endDate = editEnd.getText().toString();
+        type = editType.getText().toString();
 
         mAssessmentList = repo.getAllAssessments();
+
         int assessmentID = 1;
+        //Adding to assessment list and assessment ID is set to 1 as I have inserted 1 ID already in the main activity
         for (Assessment assessment : mAssessmentList) {
-            if (assessment.getAssessmentID() >= assessmentID) {
+            if (assessment.getAssessmentID() >= assessmentID)
+            {
                 assessmentID = assessment.getAssessmentID();
             }
         }
 
         if (mAssessmentID != -1) {
-            Assessment updatedAssessment = new Assessment(mAssessmentID, title, startDate, endDate, type, mCourseID);
+            Assessment updatedAssessment = new Assessment(mAssessmentID, assessmentName, startDate, endDate, type, mCourseID);
             repo.insertAssessment(updatedAssessment);
+
+            Intent intent = new Intent(this, AssessmentActivity.class);
+            startActivity(intent);
         } else {
-            Assessment newAssessment = new Assessment(++assessmentID, title, startDate, endDate, type,  mCourseID);
-            repo.insertAssessment(newAssessment);
+
+            if (assessmentName.trim().isEmpty() || startDate.trim().isEmpty() || endDate.trim().isEmpty() || type.trim().isEmpty()) {
+
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("Empty Text Fields");
+                alertDialog.setMessage("No  text fields can be left empty!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "I Understand",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+            }
+
+            else{
+                Assessment newAssessment = new Assessment(++assessmentID, assessmentName, startDate, endDate, type,  mCourseID);
+                repo.insertAssessment(newAssessment);
+
+                //Navigating back to assessment list after clicking delete button
+                Intent intent = new Intent(this, AssessmentActivity.class);
+                startActivity(intent);
+            }
+
+            }
+
         }
-
-
-        Intent intent = new Intent(this, AssessmentActivity.class);
-//        if (mCourseId != -1) {
-//            intent.putExtra("courseId", mCourseID);
-//        } else {
-//            intent.putExtra("courseId", mAssessCourseId);
-//        }
-
-        startActivity(intent);
-    }
-
-
 
 
 
@@ -269,7 +292,7 @@ public class DetailedAssessmentActivity extends AppCompatActivity {
         repo.deleteAssessment(mSelectedAssessment);
         Toast.makeText(DetailedAssessmentActivity.this, "Assessment Deleted", Toast.LENGTH_LONG).show();
 
-        //Navigating back to Term list after clicking delete button
+        //Navigating back to assessment list after clicking delete button
         Intent intent = new Intent(this, AssessmentActivity.class);
         startActivity(intent);
     }

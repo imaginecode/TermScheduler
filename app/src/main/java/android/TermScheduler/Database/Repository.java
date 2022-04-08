@@ -33,7 +33,7 @@ public class Repository {
     private static int NUMBER_OF_THREADS=4;
     static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-
+    //Repo has functionality that isn't being used but I plan on updating in the future for an update
     public Repository(Application application){
         TermSchedulerDataBaseBuilder db=TermSchedulerDataBaseBuilder.getDatabase(application);
         mTermDAO=db.termDAO();
@@ -47,9 +47,7 @@ public class Repository {
         catch (InterruptedException e){
             e.printStackTrace();
         }
-
     }
-
 
 
     /** DOA functions for Term*/

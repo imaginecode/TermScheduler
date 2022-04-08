@@ -2,7 +2,6 @@ package android.TermScheduler.Adapters;
 
 import android.TermScheduler.Entity.Course;
 import android.TermScheduler.R;
-import android.TermScheduler.UI.CourseActivity;
 import android.TermScheduler.UI.DetailedCourseActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,43 +16,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
-
     private Context context;
     private LayoutInflater inflater;
-    public List<Course> mCourseList;
+    public List<Course> courseList;
 
     public CourseAdapter(Context context){
         inflater = LayoutInflater.from(context);
         this.context = context;
     }
 
-
-
     //inner class
     public class CourseViewHolder extends RecyclerView.ViewHolder{
-        public TextView recyclerViewItemLayout;
-
+        public TextView itemLayoutRecycler;
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-            recyclerViewItemLayout = itemView.findViewById(R.id.item_layout);
-
+            itemLayoutRecycler = itemView.findViewById(R.id.item_layout);
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
                     int position = getAdapterPosition();
-                    Course currentCourse = mCourseList.get(position);
-
+                    Course activeCourse = courseList.get(position);
                     Intent intent = new Intent(context, DetailedCourseActivity.class);
-                    intent.putExtra("courseID", currentCourse.getCourseID());
+                    intent.putExtra("courseID", activeCourse.getCourseID());
                     intent.putExtra("position", position);
-                    intent.putExtra("termId", currentCourse.getTermID());
+                    intent.putExtra("termId", activeCourse.getTermID());
                     context.startActivity(intent);
-
                 }
             });
         }
     }
-
 
     @NonNull
     @Override
@@ -64,20 +57,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course currentCourse = mCourseList.get(position);
-        holder.recyclerViewItemLayout.setText(currentCourse.getCourseTitle());
-    }
-
+        Course activeCourse = courseList.get(position);
+        holder.itemLayoutRecycler.setText(activeCourse.getCourseTitle());    }
 
     public void setCourses(List<Course> courses){
-        mCourseList=courses;
+        courseList =courses;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if(mCourseList!=null){
-            return mCourseList.size();
+        if(courseList !=null){
+            return courseList.size();
         }
         else return 0;
     }

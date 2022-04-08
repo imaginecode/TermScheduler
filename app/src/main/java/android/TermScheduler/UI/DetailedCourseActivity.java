@@ -9,7 +9,6 @@ import android.TermScheduler.Adapters.InstructorAdapter;
 import android.TermScheduler.Database.Repository;
 import android.TermScheduler.Entity.Course;
 import android.TermScheduler.Entity.Instructor;
-import android.TermScheduler.Entity.Term;
 import android.TermScheduler.Utilities.MyReceiver;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -39,23 +38,19 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
     public static Integer activeCourseID;
 
-    EditText mNameText;
-    EditText mStartDate;
-    EditText mEndDate;
-    EditText mStatus;
-    EditText mNotes;
+    EditText editNametxt;
+    EditText editStartTxt;
+    EditText editEndTxt;
+    EditText editStatusTxt;
+    EditText editNotesTxt;
     Calendar mCalendarStart = Calendar.getInstance();
     Calendar mCalendarEnd = Calendar.getInstance();
-    SimpleDateFormat dateFormatter;
+    SimpleDateFormat sdf;
 
     DatePickerDialog.OnDateSetListener mStartDatePicker;
     DatePickerDialog.OnDateSetListener mEndDatePicker;
 
-
-
     Repository repo;
-
-
     List<Course> mCoursesList;
     Course mSelectedCourse;
 
@@ -79,17 +74,13 @@ public class DetailedCourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         String myDateFormat = "MM/dd/yyyy";
-        dateFormatter = new SimpleDateFormat(myDateFormat, Locale.US);
+        sdf = new SimpleDateFormat(myDateFormat, Locale.US);
 
         repo = new Repository(getApplication());
         mTermId = DetailedTermActivity.getActiveTermID;
 
         //gets and sets course information depending on if this is a new course being created or if its being edited
         getCourse();
-
-
-
-
 
         //Setting up Instructor Recycler
         getAllInstructors();
@@ -116,22 +107,19 @@ public class DetailedCourseActivity extends AppCompatActivity {
             findViewById(R.id.addInstructor).setVisibility(View.INVISIBLE);
             findViewById(R.id.deleteCourse).setVisibility(View.INVISIBLE);
 
-
         }
-        mNameText = findViewById(R.id.editCourseName);
-        mStartDate = findViewById(R.id.editCourseStart);
-        mEndDate = findViewById(R.id.courseEndEdit);
-        mStatus = findViewById(R.id.statusEdit);
-        mNotes = findViewById(R.id.optionalNoteEdit);
-
-
+        editNametxt = findViewById(R.id.editCourseName);
+        editStartTxt = findViewById(R.id.editCourseStart);
+        editEndTxt = findViewById(R.id.courseEndEdit);
+        editStatusTxt = findViewById(R.id.statusEdit);
+        editNotesTxt = findViewById(R.id.optionalNoteEdit);
 
         if(mCourseId != -1){
-            mNameText.setText(mSelectedCourse.getCourseTitle());
-            mStartDate.setText(mSelectedCourse.getStartDate());
-            mEndDate.setText(mSelectedCourse.getEndDate());
-            mStatus.setText(mSelectedCourse.getCourseStatus());
-            mNotes.setText(mSelectedCourse.getOptionalNote());
+            editNametxt.setText(mSelectedCourse.getCourseTitle());
+            editStartTxt.setText(mSelectedCourse.getStartDate());
+            editEndTxt.setText(mSelectedCourse.getEndDate());
+            editStatusTxt.setText(mSelectedCourse.getCourseStatus());
+            editNotesTxt.setText(mSelectedCourse.getOptionalNote());
             mTermId = Integer.valueOf(mSelectedCourse.getTermID());
         }
     }
@@ -155,8 +143,6 @@ public class DetailedCourseActivity extends AppCompatActivity {
         }
     }
 
-    
-
 
     public void setInstructorRecyclerView() {
         if (mCourseId != -1) {
@@ -174,35 +160,37 @@ public class DetailedCourseActivity extends AppCompatActivity {
 
     //3 methods  below for dating picking and formatting
 
-    private void updateLabelStart() {
+    private void updateDateStartText() {
         String format = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-        mStartDate.setText(sdf.format(mCalendarStart.getTime()));
+        editStartTxt.setText(sdf.format(mCalendarStart.getTime()));
     }
 
-    private void updateLabelEnd() {
+    private void updateDateEndText() {
         String format = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-        mEndDate.setText(sdf.format(mCalendarEnd.getTime()));
+        editEndTxt.setText(sdf.format(mCalendarEnd.getTime()));
     }
 
     public void setDatePicker() {
         mStartDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+            public void onDateSet(DatePicker datePicker, int year, int month, int day)
+            {
                 mCalendarStart.set(Calendar.YEAR, year);
                 mCalendarStart.set(Calendar.MONTH, month);
                 mCalendarStart.set(Calendar.DAY_OF_MONTH, day);
                 String myFormat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                updateLabelStart();
+                updateDateStartText();
             }
         };
-        mStartDate.setOnClickListener(new View.OnClickListener() {
+        editStartTxt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                new DatePickerDialog(DetailedCourseActivity.this, mStartDatePicker, mCalendarStart.get(Calendar.YEAR), mCalendarStart.get(Calendar.MONTH)
-                        , mCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
+            public void onClick(View view)
+            {
+                new DatePickerDialog(DetailedCourseActivity.this, mStartDatePicker, mCalendarStart.get(Calendar.YEAR),
+                        mCalendarStart.get(Calendar.MONTH), mCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         mEndDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -213,11 +201,11 @@ public class DetailedCourseActivity extends AppCompatActivity {
                 mCalendarEnd.set(Calendar.DAY_OF_MONTH, day);
                 String myFormat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                updateLabelEnd();
+                updateDateEndText();
             }
         };
 
-        mEndDate.setOnClickListener(new View.OnClickListener() {
+        editEndTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(DetailedCourseActivity.this, mEndDatePicker, mCalendarEnd.get(Calendar.YEAR), mCalendarEnd.get(Calendar.MONTH)
@@ -226,27 +214,25 @@ public class DetailedCourseActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-    //Set course Notifications
+    //Inflating detailed course menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailed_course_menu, menu);
         return true;
     }
 
+    //Set course Notifications
     public boolean onOptionsItemSelected (MenuItem item){
 
-        switch (item.getItemId()){
-            case android.R.id.home:
-                this.finish();
-                return true;
+        try{switch (item.getItemId()){
+            //This was causing a bug and I commented it out so it goes to application default
+//            case android.R.id.home:
+////                this.finish();
+//                return true;
             case R.id.shareNote:
                 Intent notesIntent = new Intent();
                 notesIntent.setAction(Intent.ACTION_SEND);
-                notesIntent.putExtra(Intent.EXTRA_TEXT, mNotes.getText().toString());
+                notesIntent.putExtra(Intent.EXTRA_TEXT, editNotesTxt.getText().toString());
                 notesIntent.putExtra(Intent.EXTRA_TITLE, "Sharing Note");
                 notesIntent.setType("text/plain");
                 Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
@@ -254,11 +240,11 @@ public class DetailedCourseActivity extends AppCompatActivity {
                 return true;
 
             case R.id.courseStartAlert:
-                String courseStartDate = mStartDate.getText().toString();
+                String courseStartDate = editStartTxt.getText().toString();
                 Date start = null;
 
                 try{
-                    start = dateFormatter.parse(courseStartDate);
+                    start = sdf.parse(courseStartDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -266,38 +252,48 @@ public class DetailedCourseActivity extends AppCompatActivity {
                 long startTrigger = start.getTime();
                 Intent startIntent = new Intent(DetailedCourseActivity.this, MyReceiver.class);
                 startIntent.putExtra("key", mSelectedCourse.getCourseTitle() + " course is beginning today");
-                Toast.makeText(DetailedCourseActivity.this, "Start notification set", Toast.LENGTH_SHORT).show();
-                PendingIntent startSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, startIntent, 0  );
+                Toast.makeText(DetailedCourseActivity.this, "Start alert set", Toast.LENGTH_SHORT).show();
+                PendingIntent firstSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, startIntent, PendingIntent.FLAG_IMMUTABLE  );
                 AlarmManager startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                startAlarmManager.set(AlarmManager.RTC_WAKEUP,startTrigger,startSend);
+                startAlarmManager.set(AlarmManager.RTC_WAKEUP,startTrigger,firstSend);
                 return true;
 
             case R.id.courseEndAlert:
-                String courseEndDate = mEndDate.getText().toString();
+                String courseEndDate = editEndTxt.getText().toString();
                 Date end = null;
 
                 try {
-                    end = dateFormatter.parse(courseEndDate);
+                    end = sdf.parse(courseEndDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
                 Long endTrigger = end.getTime();
-                Intent endIntent = new Intent(DetailedCourseActivity.this, MyReceiver.class);
-                endIntent.putExtra("key", mSelectedCourse.getCourseTitle() + " course ends today!");
-                Toast.makeText(DetailedCourseActivity.this, "End notification set", Toast.LENGTH_SHORT);
-                PendingIntent endSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, endIntent, 0);
+                Intent lastIntent = new Intent(DetailedCourseActivity.this, MyReceiver.class);
+                lastIntent.putExtra("key", mSelectedCourse.getCourseTitle() + " course ends today!");
+                Toast.makeText(DetailedCourseActivity.this, "End alert set", Toast.LENGTH_SHORT);
+                PendingIntent lastSend = PendingIntent.getBroadcast(DetailedCourseActivity.this, MainActivity.alertNum++, lastIntent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager endAlarmManager = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
-                endAlarmManager.set(AlarmManager.RTC_WAKEUP,endTrigger,endSend);
+                endAlarmManager.set(AlarmManager.RTC_WAKEUP,endTrigger,lastSend);
                 return true;
+        }}
 
+         catch(Exception e){
+             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("Save Course before setting alert");
+                alertDialog.setMessage("Course must be saved before setting alert!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                alertDialog.show();
+         }
 
-        }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
     //Deleting Course, No need to check for associated assessments as that is not specified in the requirements
     public void deleteCourse(View view) {
@@ -312,51 +308,48 @@ public class DetailedCourseActivity extends AppCompatActivity {
     //Saves course and also checks for empty fields
     public void saveCourse(View view) {
 
-        String title = mNameText.getText().toString();
-        String start = mStartDate.getText().toString();
-        String end = mEndDate.getText().toString();
-        String status = mStatus.getText().toString();
-        String optionalNote = mNotes.getText().toString();
+        String title = editNametxt.getText().toString();
+        String start = editStartTxt.getText().toString();
+        String end = editEndTxt.getText().toString();
+        String status = editStatusTxt.getText().toString();
+        String optionalNote = editNotesTxt.getText().toString();
         Course course;
 
         if(mCourseId == -1)
         {
-//            if (title.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() || status.trim().isEmpty()) {
-//
-//
-//                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//                alertDialog.setTitle("Empty Fields");
-//                alertDialog.setMessage("No fields can be left empty!");
-//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//                alertDialog.show();
-//
-//            }
-//            else {
-//
-//            }
+            //checking for empty fields
+            if (title.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() || status.trim().isEmpty()) {
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("Empty Fields");
+                alertDialog.setMessage("No fields can be left empty!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Understood",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                alertDialog.show();
 
-            if (optionalNote.trim().isEmpty()) {
-                optionalNote = " ";
             }
+            //Fields are all filled saving data
+            else {
+                if (optionalNote.trim().isEmpty()) {
+                    optionalNote = " ";
+                }
 
-            List<Course> allCourses = repo.getAllCourses();
-            int coursesSize = allCourses.size();
-            int lastId = Integer.parseInt(String.valueOf(allCourses.get(coursesSize - 1).getCourseID()));
-            course = new Course(lastId + 1, title, start, end,status, optionalNote, mTermId.toString());
-            repo.insertCourse(course);
+                List<Course> allCourses = repo.getAllCourses();
+                int coursesSize = allCourses.size();
+                int lastId = Integer.parseInt(String.valueOf(allCourses.get(coursesSize - 1).getCourseID()));
+                course = new Course(lastId + 1, title, start, end,status, optionalNote, mTermId.toString());
+                repo.insertCourse(course);
+                // Navigating back to course list after saving entered data
+                Intent intent = new Intent(this, CourseActivity.class);
+                startActivity(intent);
 
-            Intent intent = new Intent(this, CourseActivity.class);
-            startActivity(intent);
+            }
         }
         else{
-
-
             // Prevents optional note from throwing a null pointer exception when not filled, puts an empty string in
             if (optionalNote.trim().isEmpty()) {
                 optionalNote = " ";

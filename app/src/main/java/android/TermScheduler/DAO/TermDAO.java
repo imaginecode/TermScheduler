@@ -13,7 +13,7 @@ import java.util.List;
 
 @Dao
 public interface TermDAO {
-
+    //adding addition functions to DOA for further extension possibility
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTerm(Term term);
 

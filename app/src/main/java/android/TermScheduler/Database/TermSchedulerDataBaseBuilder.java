@@ -14,7 +14,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class}, version=4, exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class}, version=5, exportSchema = false)
 public abstract class TermSchedulerDataBaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
@@ -27,13 +27,10 @@ public abstract class TermSchedulerDataBaseBuilder extends RoomDatabase {
         if(INSTANCE == null) {
             synchronized (TermSchedulerDataBaseBuilder.class) {
 
-
                 if (INSTANCE == null) {
-
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TermSchedulerDataBaseBuilder.class, "termSchedulerDatabase.db")
                             .fallbackToDestructiveMigration()
                             .build();
-
 
                 }
             }

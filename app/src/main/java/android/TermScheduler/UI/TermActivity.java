@@ -55,7 +55,6 @@ public class TermActivity extends AppCompatActivity {
         mAdapter.termsSetter(repo.getAllTerms());
     }
 
-
     public void goToDetailedTerm(View view) {
         Intent intent = new Intent(TermActivity.this, DetailedTermActivity.class);
         startActivity(intent);

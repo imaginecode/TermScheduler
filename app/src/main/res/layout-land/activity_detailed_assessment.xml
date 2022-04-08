@@ -7,139 +7,140 @@
     tools:context=".UI.DetailedAssessmentActivity">
 
 
-    <TextView
-        android:id="@+id/assessmentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="12dp"
-        android:text="Assessment:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editAssessmentTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-67dp">
 
-    <TextView
-        android:id="@+id/assessmentStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="72dp"
-        android:text="Start:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editStartDateAssessment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/assessmentEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="80dp"
-        android:text="End:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editEndDateAssessment"
-        app:layout_constraintEnd_toStartOf="@+id/editEndDateAssessment"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/assessmentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="41dp"
+                android:text="Assessment:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/assessmentType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="303dp"
-        android:text="Type:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/editAssessmentTitle"
+                android:layout_width="616dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="101dp"
+                android:hint="Assessment Title"
+                android:paddingLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editAssessmentTitle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="13dp"
-        android:hint="Assessment Title"
-        android:paddingLeft="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/editStartDateAssessment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/assessmentName"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/assessmentStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="60dp"
+                android:text="Start:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/editStartDateAssessment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessmentName" />
 
+            <EditText
+                android:id="@+id/editStartDateAssessment"
+                android:layout_width="618dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="101dp"
+                android:ems="10"
+                android:hint="10/24/2022"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/assessmentStart"
+                app:layout_constraintTop_toBottomOf="@+id/editAssessmentTitle" />
 
-    <EditText
-        android:id="@+id/editStartDateAssessment"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="27dp"
-        android:ems="10"
-        android:hint="10/24/2022"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/editEndDateAssessment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/assessmentStart"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentName" />
+            <TextView
+                android:id="@+id/assessmentEnd"
+                android:layout_width="49dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="85dp"
+                android:text="End:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/assessmentType"
+                app:layout_constraintEnd_toStartOf="@+id/editEndDateAssessment"
+                app:layout_constraintHorizontal_bias="0.021"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessmentStart"
+                app:layout_constraintVertical_bias="1.0" />
 
+            <EditText
+                android:id="@+id/editEndDateAssessment"
+                android:layout_width="620dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="136dp"
+                android:ems="10"
+                android:hint="10/24/2022"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@+id/saveAssessment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editStartDateAssessment"
+                app:layout_constraintVertical_bias="0.344" />
 
-    <EditText
-        android:id="@+id/editEndDateAssessment"
-        android:layout_width="0dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:hint="10/24/2022"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/assessmentEnd"
-        app:layout_constraintTop_toTopOf="@+id/assessmentStart" />
+            <TextView
+                android:id="@+id/assessmentType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginBottom="66dp"
+                android:text="Type:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/saveAssessment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="368dp"
-        android:layout_marginBottom="44dp"
-        android:onClick="saveAssessment"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AssessmentType"
-        app:layout_constraintVertical_bias="1.0" />
+            <EditText
+                android:id="@+id/AssessmentType"
+                android:layout_width="181dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="42dp"
+                android:hint="Objective/Practical Assessment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/saveAssessment" />
 
-    <Button
-        android:id="@+id/deleteAssessment"
-        android:layout_width="169dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="44dp"
-        android:onClick="deleteAssessment"
-        android:text="Delete Assessment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/saveAssessment"
-        app:layout_constraintTop_toBottomOf="@+id/AssessmentType"
-        app:layout_constraintVertical_bias="1.0" />
+            <Button
+                android:id="@+id/saveAssessment"
+                android:layout_width="123dp"
+                android:layout_height="69dp"
+                android:layout_marginEnd="71dp"
+                android:layout_marginBottom="21dp"
+                android:onClick="saveAssessment"
+                android:text="Save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/deleteAssessment" />
 
-    <EditText
-        android:id="@+id/AssessmentType"
-        android:layout_width="181dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="52dp"
-        android:hint="Objective/Practical Assessment"
-        app:layout_constraintStart_toEndOf="@+id/assessmentType"
-        app:layout_constraintTop_toBottomOf="@+id/editEndDateAssessment" />
+            <Button
+                android:id="@+id/deleteAssessment"
+                android:layout_width="180dp"
+                android:layout_height="62dp"
+                android:layout_marginEnd="113dp"
+                android:layout_marginBottom="21dp"
+                android:onClick="deleteAssessment"
+                android:text="Delete Assessment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

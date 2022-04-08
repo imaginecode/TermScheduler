@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.InstructorViewHolder> {
-    public List<Instructor> mInstructorList;
+    public List<Instructor> instructorList;
     private Context context;
     private LayoutInflater inflater;
 
@@ -26,18 +26,16 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
     }
 
     public class InstructorViewHolder extends RecyclerView.ViewHolder{
-        public TextView recyclerViewItemLayout;
-
+        public TextView itemRecycler;
         public InstructorViewHolder(@NonNull View itemView) {
             super(itemView);
-            recyclerViewItemLayout = itemView.findViewById(R.id.item_layout);
-
+            itemRecycler = itemView.findViewById(R.id.item_layout);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
                     int position = getAdapterPosition();
-                    Instructor selected = mInstructorList.get(position);
-
+                    Instructor selected = instructorList.get(position);
                     Intent intent = new Intent(context, InstructorActivity.class );
                     intent.putExtra("instructorID", selected.getInstructorID() );
                     intent.putExtra("position", position);
@@ -53,24 +51,22 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
     public InstructorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new InstructorViewHolder(view);
+    }
 
+    public void setInstructor(List<Instructor> instructor){
+        instructorList = instructor;
+        notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(@NonNull InstructorViewHolder holder, int position) {
-        Instructor currentInstructor = mInstructorList.get(position);
-        holder.recyclerViewItemLayout.setText(currentInstructor.getInstructorName());
+        Instructor activeInstructor = instructorList.get(position);
+        holder.itemRecycler.setText(activeInstructor.getInstructorName());
     }
 
     @Override
     public int getItemCount() {
-        return mInstructorList.size();
-    }
-
-
-    public void setInstructor(List<Instructor> instructor){
-        mInstructorList = instructor;
-        notifyDataSetChanged();
+        return instructorList.size();
     }
 
 }
